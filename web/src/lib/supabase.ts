@@ -3,17 +3,21 @@
 const RAW_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").trim().replace(/\/+$/, "");
 export const SUPABASE_KEY = (process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "").trim();
 
-/** The API "Project URL" (https://xxxx.supabase.co), not the dashboard address. */
-function isApiUrl(u: string) {
+/** The API "Project URL" (https://xxxx.supabase.co). The dashboard address people often copy from the browser
+    (https://supabase.com/dashboard/project/xxxx/...) is turned into it automatically: same project, API form. */
+function apiUrl(u: string) {
   try {
     const url = new URL(u);
-    return /^https?:$/.test(url.protocol) && url.hostname.includes(".") && url.hostname !== "supabase.com" && (url.pathname === "/" || url.pathname === "");
+    const ref = /^\/dashboard\/project\/([a-z0-9]{15,30})(\/|$)/.exec(url.pathname)?.[1];
+    if (/(^|\.)supabase\.com$/.test(url.hostname)) return ref ? `https://${ref}.supabase.co` : "";
+    const ok = /^https?:$/.test(url.protocol) && url.hostname.includes(".") && (url.pathname === "/" || url.pathname === "");
+    return ok ? url.origin : "";
   } catch {
-    return false;
+    return "";
   }
 }
 
-export const SUPABASE_URL = isApiUrl(RAW_URL) ? RAW_URL : "";
+export const SUPABASE_URL = apiUrl(RAW_URL);
 export const supabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_KEY);
 /** Set when a URL was provided but is not a valid Project URL (shown on /admin). */
 export const supabaseUrlProblem = RAW_URL && !SUPABASE_URL ? RAW_URL : "";
