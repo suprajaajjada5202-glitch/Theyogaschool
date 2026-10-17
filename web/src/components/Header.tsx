@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useBodyLock } from "@/hooks/useBodyLock";
 import { LOGO, MORE, OFFER_URL, PRIMARY, TILES } from "@/lib/site";
 import { TileIcon, Use } from "./Icons";
+import { ThemeToggle } from "./ThemeToggle";
 
 const HOME_PATHS = ["/", "/home", "/pages/home"];
 
@@ -16,7 +17,6 @@ export function Header() {
   const isCurrent = (href: string) => href === current;
 
   const [solid, setSolid] = useState(light);
-  const [hidden, setHidden] = useState(false);
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
@@ -29,20 +29,15 @@ export function Header() {
   const panel = useRef<HTMLDivElement>(null);
   useBodyLock(menuOpen);
 
-  // Scroll: solid header, hide on scroll down, progress bar, back-to-top
+  // Scroll: solid header, progress bar, back-to-top. The header always stays on screen.
   useEffect(() => {
-    let last = window.scrollY;
     let ticking = false;
     const update = () => {
       const y = window.scrollY;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setSolid(light || y > 40);
-      setHidden((h) =>
-        y > 600 && y > last + 4 && !document.body.classList.contains("is-locked") ? true : y < last - 4 || y < 600 ? false : h,
-      );
       setProgress(max > 0 ? y / max : 0);
       setShowTop(y > window.innerHeight);
-      last = y;
       ticking = false;
     };
     const onScroll = () => {
@@ -105,7 +100,7 @@ export function Header() {
   }, [menuOpen]);
 
   const moreActive = MORE.some((m) => isCurrent(m.href));
-  const headerCls = ["site-header", light && "is-light", solid && "is-solid", hidden && "is-hidden"].filter(Boolean).join(" ");
+  const headerCls = ["site-header", light && "is-light", solid && "is-solid"].filter(Boolean).join(" ");
 
   return (
     <>
@@ -113,7 +108,7 @@ export function Header() {
         <span style={{ transform: `scaleX(${progress})` }}></span>
       </div>
 
-      <header className={headerCls} onFocus={() => setHidden(false)}>
+      <header className={headerCls}>
         <div className="container">
           <div className="island">
             <Link className="brand" href="/pages/home" aria-label="The Yoga School, home">
@@ -193,20 +188,23 @@ export function Header() {
                 </li>
               </ul>
             </nav>
-            <Link className="btn btn--teal btn--sm header-cta" href="/pages/timetable">
-              Book a Class
-            </Link>
-            <button
-              ref={toggleBtn}
-              className="nav-toggle"
-              type="button"
-              aria-label="Open menu"
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              onClick={() => setMenuOpen(true)}
-            >
-              <span></span>
-            </button>
+            <div className="island__actions">
+              <ThemeToggle />
+              <Link className="btn btn--teal btn--sm header-cta" href="/pages/timetable">
+                Book a Class
+              </Link>
+              <button
+                ref={toggleBtn}
+                className="nav-toggle"
+                type="button"
+                aria-label="Open menu"
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu"
+                onClick={() => setMenuOpen(true)}
+              >
+                <span></span>
+              </button>
+            </div>
           </div>
         </div>
       </header>

@@ -8,6 +8,7 @@ import { NAV, TYPES } from "./config";
 import { ContentSection } from "./ContentSection";
 import { Dashboard } from "./Dashboard";
 import { Icon } from "./Icon";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Messages } from "./Messages";
 import { ToastProvider } from "./Toast";
 
@@ -202,13 +203,16 @@ export function AdminApp() {
     <ToastProvider>
       <div className="a-app">
         <aside className="a-side">
-          <a className="a-brand" href="/pages/home" target="_blank" rel="noopener">
-            <img src={LOGO} alt="" width={40} height={40} />
-            <span>
-              The Yoga School
-              <small>Website admin</small>
-            </span>
-          </a>
+          <div className="a-side__top">
+            <a className="a-brand" href="/pages/home" target="_blank" rel="noopener">
+              <img src={LOGO} alt="" width={40} height={40} />
+              <span>
+                The Yoga School
+                <small>Website admin</small>
+              </span>
+            </a>
+            <ThemeToggle />
+          </div>
           <nav aria-label="Sections">
             {NAV.slice(0, 2).map(navButton)}
             <p className="a-navlabel">Content</p>
