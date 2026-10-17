@@ -1,0 +1,26 @@
+{
+  // Next.js app in ./web. Dev server: http://localhost:3000/pages/home
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js: start dev server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev",
+      "cwd": "${workspaceFolder}/web"
+    },
+    {
+      "name": "Next.js: open in Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000/pages/home",
+      "webRoot": "${workspaceFolder}/web"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Next.js: dev server + Chrome",
+      "configurations": ["Next.js: start dev server", "Next.js: open in Chrome"]
+    }
+  ]
+}

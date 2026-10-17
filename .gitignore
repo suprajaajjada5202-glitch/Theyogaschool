@@ -1,0 +1,14 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Local environment (real settings live here; never commit secret keys)
+.env*.local
+.env.local
+
+# OS / editor clutter
+.DS_Store
+*.log
