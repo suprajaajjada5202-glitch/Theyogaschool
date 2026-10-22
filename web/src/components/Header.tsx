@@ -75,7 +75,7 @@ export function Header() {
         }
       }
     };
-    const onResize = () => window.innerWidth >= 1180 && setMenuOpen(false);
+    const onResize = () => window.innerWidth >= 1280 && setMenuOpen(false);
     document.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
     return () => {
