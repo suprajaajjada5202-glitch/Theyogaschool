@@ -9,7 +9,7 @@ import { useToast } from "./Toast";
 type Counts = Record<string, { total: number; live: number }>;
 
 /** Overview: how much content each section has, plus the one-click import of the website's current content. */
-export function Dashboard({ go, newMessages, email }: { go: (key: string) => void; newMessages: number; email: string }) {
+export function Dashboard({ go, newMessages }: { go: (key: string) => void; newMessages: number }) {
   const toast = useToast();
   const [counts, setCounts] = useState<Counts | null>(null);
   const [busy, setBusy] = useState(false);
@@ -50,17 +50,10 @@ export function Dashboard({ go, newMessages, email }: { go: (key: string) => voi
     }
   }
 
-  const hour = Number(
-    new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Brisbane", hour: "numeric", hour12: false }).format(new Date()),
-  );
   return (
     <>
       <div className="a-head">
-        <div>
-          <p className="a-eyebrow">{hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening"}</p>
-          <h1>Website content</h1>
-          <p>Everything you change here shows on the website straight away. Signed in as {email}.</p>
-        </div>
+        <h1>Dashboard</h1>
         <a className="btn btn--outline btn--sm" href="/pages/home" target="_blank" rel="noopener">
           View website ↗
         </a>
@@ -69,14 +62,12 @@ export function Dashboard({ go, newMessages, email }: { go: (key: string) => voi
       {counts && empty.length > 0 && (
         <section className="a-import">
           <div>
-            <h2>Bring your current website content into the admin panel</h2>
+            <h2>Import content</h2>
             <p>
               {empty.length === Object.keys(TYPES).length
                 ? "All sections are"
                 : `${empty.map((t) => TYPES[t].title).join(", ")} ${empty.length === 1 ? "is" : "are"}`}{" "}
-              empty, so the website is showing its built-in content. Import copies what the website shows today (classes, prices,
-              blog articles, gift vouchers, plus your timetable, events and shop products from Momence) into Supabase, so you can
-              edit it here. Sections that already have content are never touched.
+              empty. Import copies what the website shows today, so you can edit it here.
             </p>
           </div>
           <button className="btn btn--primary" type="button" onClick={runImport} disabled={busy}>
@@ -121,22 +112,6 @@ export function Dashboard({ go, newMessages, email }: { go: (key: string) => voi
           );
         })}
       </div>
-
-      <section className="a-tips">
-        <h2>How it works</h2>
-        <ul>
-          <li>
-            <b>Edit</b> any row, press <b>Save</b>, and refresh the website page: the change is already there.
-          </li>
-          <li>
-            Use the <b>Live</b> switch to hide something from the website without deleting it.
-          </li>
-          <li>
-            <b>Sort</b> numbers set the order: lower numbers show first.
-          </li>
-          <li>Bookings and payments stay in Momence. The homepage “Upcoming classes” list always reads Momence directly.</li>
-        </ul>
-      </section>
     </>
   );
 }

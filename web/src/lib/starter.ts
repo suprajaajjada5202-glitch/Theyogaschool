@@ -1,9 +1,9 @@
 /* Starter content for the admin "Import" button: everything the website shows today, shaped as
    Supabase rows. Classes, prices and blog come from the built-in site content (so the website looks the
-   same before and after importing); timetable, events and shop products come from the live Momence data. */
+   same before and after importing); timetable and events come from the live Momence data. */
 import * as site from "@/data/content";
 import type { ContentTable } from "./adminAuth";
-import { getMomenceSessions, getShopProducts, MOMENCE_SHOP_URL } from "./momence";
+import { getMomenceSessions } from "./momence";
 
 type Row = Record<string, unknown>;
 const TZ = "Australia/Brisbane";
@@ -122,18 +122,6 @@ export async function starterRows(table: ContentTable, classSlugs: Set<string>):
         v("30 days unlimited (new students)", "$99", "30 days of unlimited classes for someone new to The Yoga School.", 40),
       ];
     }
-    case "shop_products":
-      return (await getShopProducts()).map((p, i) => ({
-        name: p.name,
-        category: null,
-        description: p.description || null,
-        price: p.price,
-        image_url: p.image,
-        buy_url: MOMENCE_SHOP_URL,
-        in_stock: true,
-        sort: i * 10,
-        published: true,
-      }));
     case "timetable": {
       // One week of the live Momence timetable = the regular weekly pattern
       const seen = new Set<string>();

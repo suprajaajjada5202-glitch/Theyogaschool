@@ -208,29 +208,8 @@ export async function getVouchers(): Promise<Voucher[]> {
   }));
 }
 
-type DbProduct = {
-  name: string;
-  category: string | null;
-  description: string | null;
-  price: number | null;
-  image_url: string | null;
-  buy_url: string | null;
-  in_stock: boolean;
-};
-/** Shop: the products managed in /admin (Supabase). Until any are added (or imported), the studio's live
-    Momence shop catalogue is shown, then the built-in items. */
+/** Shop: the studio's live Momence shop catalogue (managed in Momence, refreshed hourly); built-in items if Momence is unreachable. */
 export async function getProducts(): Promise<Product[]> {
-  const rows = await selectRows<DbProduct>("shop_products", "select=*&published=eq.true&order=sort.asc");
-  if (rows?.length)
-    return rows.map((p) => ({
-      name: p.name,
-      category: p.category ?? "",
-      description: p.description ?? "",
-      priceLabel: p.price != null ? money(p.price) : "Enquire in studio",
-      image: img(p.image_url, p.name),
-      ctaLabel: !p.in_stock ? "Out of stock" : p.buy_url ? "Buy" : "Enquire",
-      ctaUrl: !p.in_stock ? "" : (p.buy_url ?? "/pages/contact-us"),
-    }));
   const live: Product[] = (await getShopProducts()).map((p) => ({
     name: p.name,
     category: "",

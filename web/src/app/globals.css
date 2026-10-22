@@ -532,6 +532,10 @@ button {
     top: 16px;
   }
 }
+/* The bar may run a little wider than the page content so the full menu fits */
+.site-header .container {
+  max-width: calc(1320px + var(--gutter) * 2);
+}
 .island {
   pointer-events: auto;
   display: flex;
@@ -592,13 +596,17 @@ button {
 .nav-desktop {
   display: none;
 }
+.nav-desktop {
+  /* Link padding: 10px at 1280px wide (where the full menu starts), 14px from 1360px */
+  --nav-pad: clamp(10px, 5vw - 54px, 14px);
+}
 .nav-desktop ul {
   display: flex;
   gap: 2px;
 }
 .nav-desktop a {
   display: block;
-  padding: 8px 14px;
+  padding: 8px var(--nav-pad);
   border-radius: var(--radius-pill);
   color: var(--c-white);
   text-decoration: none;
@@ -678,9 +686,13 @@ button {
 .header-cta {
   display: none;
 }
-@media (min-width: 1180px) {
-  .nav-desktop,
+@media (min-width: 768px) {
   .header-cta {
+    display: inline-flex;
+  }
+}
+@media (min-width: 1280px) {
+  .nav-desktop {
     display: flex;
   }
   .nav-toggle {
@@ -2263,6 +2275,29 @@ button:hover .play {
     max-height: 80vh;
   }
 }
+.schedule__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 256px;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+}
+.schedule__loading span {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid var(--c-line);
+  border-top-color: var(--c-secondary);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .schedule__help {
   text-align: center;
   font-size: var(--fs-sm);
@@ -2280,6 +2315,62 @@ button:hover .play {
   --momenceColorBackground: #ffffff;
   --momenceColorPrimary: 0, 171, 201;
   --momenceColorBlack: 14, 50, 103;
+}
+/* Momence bakes the colours above into fixed values once, when the widget loads, and hard-codes
+   its titles as near-black. Its full palette, defined here from the theme roles, follows the
+   light / dark toggle live and keeps every label readable (set on body so pop-ups get it too). */
+body {
+  --momence-background: var(--c-surface);
+  --momence-white: var(--c-surface);
+  --momence-session-separator-color: var(--c-line);
+  --momence-primary-color: var(--c-heading);
+  --momence-secondary-color: var(--c-ink);
+  --momence-tertiary-color: var(--c-ink-soft);
+  --momence-primary-050: color-mix(in srgb, var(--c-secondary-ink) 4%, var(--c-surface));
+  --momence-primary-100: color-mix(in srgb, var(--c-secondary-ink) 10%, var(--c-surface));
+  --momence-primary-200: color-mix(in srgb, var(--c-secondary-ink) 22%, var(--c-surface));
+  --momence-primary-300: color-mix(in srgb, var(--c-secondary-ink) 40%, var(--c-surface));
+  --momence-primary-400: color-mix(in srgb, var(--c-secondary-ink) 70%, var(--c-surface));
+  --momence-primary-500: var(--c-secondary-ink);
+  --momence-primary-600: color-mix(in srgb, var(--c-secondary-ink) 85%, var(--c-heading));
+  --momence-primary-700: color-mix(in srgb, var(--c-secondary-ink) 70%, var(--c-heading));
+  --momence-primary-800: color-mix(in srgb, var(--c-secondary-ink) 50%, var(--c-heading));
+  --momence-primary-900: color-mix(in srgb, var(--c-secondary-ink) 30%, var(--c-heading));
+  --momence-black-100: var(--c-ink-soft);
+  --momence-black-200: var(--c-ink-soft);
+  --momence-black-300: var(--c-ink);
+  --momence-black-400: var(--c-ink);
+  --momence-black-500: var(--c-heading);
+  --momence-grey-050: color-mix(in srgb, var(--c-heading) 3%, var(--c-surface));
+  --momence-grey-100: color-mix(in srgb, var(--c-heading) 5%, var(--c-surface));
+  --momence-grey-200: color-mix(in srgb, var(--c-heading) 8%, var(--c-surface));
+  --momence-grey-300: color-mix(in srgb, var(--c-heading) 12%, var(--c-surface));
+  --momence-grey-400: color-mix(in srgb, var(--c-heading) 18%, var(--c-surface));
+  --momence-grey-500: color-mix(in srgb, var(--c-heading) 28%, var(--c-surface));
+  --momence-grey-600: color-mix(in srgb, var(--c-heading) 38%, var(--c-surface));
+  --momence-grey-700: color-mix(in srgb, var(--c-heading) 46%, var(--c-surface));
+  --momence-grey-800: color-mix(in srgb, var(--c-heading) 54%, var(--c-surface));
+  --momence-grey-900: color-mix(in srgb, var(--c-heading) 62%, var(--c-surface));
+  --momence-dark-background-200: color-mix(in srgb, var(--c-heading) 6%, transparent);
+  --momence-dark-background-300: color-mix(in srgb, var(--c-heading) 9%, transparent);
+  --momence-dark-background-400: color-mix(in srgb, var(--c-heading) 12%, transparent);
+  --momence-dark-background-500: color-mix(in srgb, var(--c-heading) 16%, transparent);
+  --momence-dark-background-800: color-mix(in srgb, var(--c-heading) 50%, transparent);
+  --momence-dark-background-900: rgba(7, 26, 56, 0.76);
+  --momence-light-background-900: color-mix(in srgb, var(--c-surface) 94%, transparent);
+  --momence-dark-alpha-fill-900: color-mix(in srgb, var(--c-heading) 80%, transparent);
+  --momence-dark-alpha-fill-800: color-mix(in srgb, var(--c-heading) 60%, transparent);
+  --momence-dark-alpha-fill-700: color-mix(in srgb, var(--c-heading) 45%, transparent);
+  --momence-dark-alpha-fill-600: color-mix(in srgb, var(--c-heading) 30%, transparent);
+  --momence-dark-alpha-fill-500: color-mix(in srgb, var(--c-heading) 18%, transparent);
+  --momence-dark-alpha-fill-400: color-mix(in srgb, var(--c-heading) 14%, transparent);
+  --momence-dark-alpha-fill-300: color-mix(in srgb, var(--c-heading) 9%, transparent);
+  --momence-dark-alpha-fill-200: color-mix(in srgb, var(--c-heading) 6%, transparent);
+  --momence-dark-alpha-fill-100: color-mix(in srgb, var(--c-heading) 4%, transparent);
+  --momence-light-alpha-fill-900: color-mix(in srgb, var(--c-surface) 94%, transparent);
+  --momence-light-alpha-fill-700: color-mix(in srgb, var(--c-surface) 64%, transparent);
+  --momence-light-alpha-fill-600: color-mix(in srgb, var(--c-surface) 30%, transparent);
+  --momence-light-alpha-fill-500: color-mix(in srgb, var(--c-surface) 18%, transparent);
 }
 
 /* =====================================================================
@@ -2456,82 +2547,177 @@ button:hover .play {
   height: 26px;
 }
 
-.passes {
-  margin-top: var(--s-3);
-  background: var(--c-surface);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--c-line);
+/* Passes: one card per group, then the fine print (pricing page) */
+.pass-grid {
+  display: grid;
+  gap: var(--s-3);
 }
-.passes summary {
-  list-style: none;
-  cursor: pointer;
+@media (min-width: 640px) {
+  .pass-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pass-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 1024px) {
+  .pass-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .pass-card,
+  .pass-card:last-child:nth-child(odd) {
+    grid-column: span 2;
+  }
+  /* Three to a row; a last row of two splits the width, a lone last card fills it */
+  .pass-card:nth-child(3n + 1):nth-last-child(2),
+  .pass-card:nth-child(3n + 1):nth-last-child(2) + .pass-card {
+    grid-column: span 3;
+  }
+  .pass-card:nth-child(3n + 1):last-child {
+    grid-column: 1 / -1;
+  }
+}
+.pass-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--s-3);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+@media (min-width: 768px) {
+  .pass-card {
+    padding: var(--s-4);
+  }
+}
+.pass-card--featured {
+  background: radial-gradient(80% 70% at 100% 0%, rgba(0, 171, 201, 0.35), transparent 70%), var(--c-primary);
+  border-color: var(--c-primary);
+  box-shadow: var(--shadow-lg);
+}
+.pass-card__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: var(--s-3);
+}
+.pass-card__head h3 {
+  margin: 0;
+  font-size: 1.625rem;
+}
+.pass-card__ic {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--c-light);
+  color: var(--c-secondary-ink);
+}
+.pass-card__ic svg {
+  width: 22px;
+  height: 22px;
+}
+.pass-card__list li {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--s-2);
-  padding: var(--s-3);
-  font-family: var(--f-heading);
-  font-size: 1.5rem;
-  font-weight: 600;
+  padding: 14px 0;
+  border-top: 1px solid var(--c-line);
+}
+.pass-card__name {
+  font-weight: 500;
+  line-height: 1.35;
   color: var(--c-heading);
 }
-.passes summary::-webkit-details-marker {
-  display: none;
+.pass-card__name small {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--c-ink-soft);
 }
-.passes__body {
-  padding: 0 var(--s-3) var(--s-3);
-  display: grid;
-  gap: var(--s-4);
+.pass-card__price {
+  font-family: var(--f-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+  color: var(--c-heading);
 }
-@media (min-width: 768px) {
-  .passes__body {
-    grid-template-columns: repeat(2, 1fr);
+.pass-card__note {
+  margin: auto 0 0;
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--c-line);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+}
+.pass-card__note a {
+  font-weight: 600;
+}
+.pass-card--featured :is(h3, .pass-card__name, .pass-card__price, .pass-card__note a) {
+  color: var(--c-white);
+}
+.pass-card--featured :is(.pass-card__name small, .pass-card__note) {
+  color: rgba(255, 255, 255, 0.78);
+}
+.pass-card--featured :is(.pass-card__list li, .pass-card__note) {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+.pass-card--featured .pass-card__ic {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--c-secondary);
+}
+.pass-terms {
+  margin-top: var(--s-4);
+  padding: var(--s-3);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface-soft);
+}
+@media (min-width: 900px) {
+  .pass-terms {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--s-4);
+    padding: var(--s-4);
   }
 }
-.price-list h4 {
-  font-family: var(--f-body);
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--c-secondary-ink);
-  margin: var(--s-3) 0 var(--s-1);
+.pass-terms h3 {
+  font-size: 1.5rem;
 }
-.price-list h4:first-child {
-  margin-top: 0;
-}
-.price-list li {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--s-2);
-  padding: 9px 0;
-  border-bottom: 1px dashed var(--c-line);
+.pass-terms ul {
   font-size: var(--fs-sm);
-}
-.price-list li span:last-child {
-  font-weight: 700;
-  color: var(--c-heading);
-  white-space: nowrap;
-}
-.price-list small {
-  display: block;
   color: var(--c-ink-soft);
-  margin-top: var(--s-1);
-  font-size: var(--fs-xs);
 }
-.fine-print {
-  grid-column: 1 / -1;
-  font-size: var(--fs-xs);
-  color: var(--c-ink-soft);
-  background: var(--c-secondary-100);
-  border-radius: var(--radius);
-  padding: var(--s-2) var(--s-3);
+@media (min-width: 768px) {
+  .pass-terms ul {
+    columns: 2;
+    column-gap: var(--s-4);
+  }
 }
-.fine-print ul {
-  list-style: disc;
-  padding-left: var(--s-2);
-  display: grid;
-  gap: 4px;
+.pass-terms li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 12px;
+  line-height: 1.55;
+  break-inside: avoid;
+}
+.pass-terms li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-secondary);
 }
 .plus {
   position: relative;
@@ -3714,12 +3900,6 @@ body::after {
   background: var(--c-fill);
   color: var(--c-white);
 }
-@media (min-width: 1180px) and (max-width: 1279px) {
-  .nav-desktop a,
-  .drop-btn {
-    padding: 8px 10px !important;
-  }
-}
 
 /* "More" dropdown */
 .has-drop {
@@ -3729,7 +3909,7 @@ body::after {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
+  padding: 8px var(--nav-pad);
   border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
@@ -4414,11 +4594,6 @@ body::after {
 }
 .info-card .feature__icon {
   margin-bottom: var(--s-2);
-}
-
-/* Passes (open on pricing page) */
-.passes--open {
-  padding-top: var(--s-3);
 }
 
 /* Home: intro split */

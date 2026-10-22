@@ -30,14 +30,6 @@ export async function adminToken(req: Request): Promise<string | null> {
 }
 
 /** Tables the admin panel edits; each is also the cache tag used by the website (see selectRows). */
-export const CONTENT_TABLES = [
-  "classes",
-  "timetable",
-  "prices",
-  "events",
-  "blog_posts",
-  "shop_products",
-  "gift_vouchers",
-] as const;
+export const CONTENT_TABLES = ["classes", "timetable", "prices", "events", "blog_posts", "gift_vouchers"] as const;
 export type ContentTable = (typeof CONTENT_TABLES)[number];
 export const isContentTable = (t: unknown): t is ContentTable => CONTENT_TABLES.includes(t as ContentTable);

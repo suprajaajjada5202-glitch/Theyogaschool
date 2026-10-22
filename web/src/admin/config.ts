@@ -236,32 +236,6 @@ export const TYPES: Record<string, ContentType> = {
       PUBLISHED,
     ],
   },
-  shop_products: {
-    page: "/pages/shop",
-    thumb: "image_url",
-    title: "Shop",
-    single: "product",
-    order: [["sort", true]],
-    search: ["name", "category"],
-    intro: "Products on the Shop page. Leave the price empty to show “Enquire in studio”.",
-    cols: [
-      ["Product", (r) => String(r.name ?? "")],
-      ["Price", (r) => money(r.price) || "Enquire"],
-      ["Stock", (r) => (r.in_stock ? "In stock" : "Out of stock")],
-      ["Status", status],
-    ],
-    fields: [
-      F("name", "Product name", "text", { required: true, half: true }),
-      F("category", "Category", "text", { half: true }),
-      F("description", "Description", "textarea"),
-      F("price", "Price ($)", "number", { half: true, step: "0.01" }),
-      F("buy_url", "Buy link", "url", { half: true, help: "e.g. the product on Momence" }),
-      F("image_url", "Photo", "image"),
-      F("sort", "Sort", "number", { half: true, def: 0 }),
-      F("in_stock", "In stock", "checkbox", { half: true, def: true }),
-      PUBLISHED,
-    ],
-  },
   gift_vouchers: {
     page: "/gift-vouchers",
     title: "Gift vouchers",
@@ -293,7 +267,6 @@ export const ICONS: Record<string, string> = {
   prices: "M20 12l-8 8-8-8V4h8zM8 8h.01",
   events: "M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z",
   blog_posts: "M5 4h14v16H5zM8 8h8M8 12h8M8 16h5",
-  shop_products: "M6 7h12l-1 13H7zM9 7a3 3 0 0 1 6 0",
   gift_vouchers: "M4 8h16v12H4zM12 8v12M4 12h16M12 8S10.5 3 8 3.8C5.8 4.5 7 8 12 8zm0 0s1.5-5 4-4.2C18.2 4.5 17 8 12 8z",
 };
 export const NAV: [string, string][] = [

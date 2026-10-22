@@ -22,6 +22,7 @@ export function AdminApp() {
   const [newCount, setNewCount] = useState(0);
   const [msg, setMsg] = useState<{ text: string; ok?: boolean } | null>(null);
   const [busy, setBusy] = useState(false);
+  const [showPw, setShowPw] = useState(false);
   const [denied, setDenied] = useState<{ id: string; email: string; reason: string } | null>(null);
 
   const start = useCallback(async (u: User) => {
@@ -175,7 +176,26 @@ export function AdminApp() {
           </div>
           <div className="field">
             <label htmlFor="l-pass">Password</label>
-            <input id="l-pass" name="password" type="password" autoComplete="current-password" required />
+            <div className="a-pw">
+              <input id="l-pass" name="password" type={showPw ? "text" : "password"} autoComplete="current-password" required />
+              <button
+                type="button"
+                className="a-pw__toggle"
+                aria-controls="l-pass"
+                aria-pressed={showPw}
+                aria-label={showPw ? "Hide password" : "Show password"}
+                onClick={() => setShowPw((v) => !v)}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <g fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
+                    <circle cx="12" cy="12" r="3" />
+                    {showPw && <path d="M4 4l16 16" />}
+                  </g>
+                </svg>
+                <span>{showPw ? "Hide" : "Show"}</span>
+              </button>
+            </div>
           </div>
           <button className="btn btn--primary" type="submit" disabled={busy}>
             {busy ? "Signing in…" : "Sign in"}
@@ -237,7 +257,7 @@ export function AdminApp() {
         </aside>
         <main className="a-main">
           {section === "dashboard" ? (
-            <Dashboard go={go} newMessages={newCount} email={user?.email ?? ""} />
+            <Dashboard go={go} newMessages={newCount} />
           ) : section === "messages" ? (
             <Messages onCountChange={refreshCount} />
           ) : (

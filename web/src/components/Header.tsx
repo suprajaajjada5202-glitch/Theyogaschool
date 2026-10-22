@@ -3,8 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useBodyLock } from "@/hooks/useBodyLock";
-import { LOGO, MORE, OFFER_URL, PRIMARY, TILES } from "@/lib/site";
+import { LOGO, MORE, OFFER_URL, PRIMARY, SHOP, TILES } from "@/lib/site";
 import { TileIcon, Use } from "./Icons";
+import { NavDrop } from "./NavDrop";
 import { ThemeToggle } from "./ThemeToggle";
 
 const HOME_PATHS = ["/", "/home", "/pages/home"];
@@ -19,11 +20,7 @@ export function Header() {
   const [solid, setSolid] = useState(light);
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
-  const [dropOpen, setDropOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const dropWrap = useRef<HTMLLIElement>(null);
-  const dropBtn = useRef<HTMLButtonElement>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const toggleBtn = useRef<HTMLButtonElement>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -54,18 +51,7 @@ export function Header() {
   // Close menus when the page changes
   useEffect(() => {
     setMenuOpen(false);
-    setDropOpen(false);
   }, [pathname]);
-
-  // Dropdown: close on outside click
-  useEffect(() => {
-    if (!dropOpen) return;
-    const onDoc = (e: MouseEvent) => {
-      if (!dropWrap.current?.contains(e.target as Node)) setDropOpen(false);
-    };
-    document.addEventListener("click", onDoc);
-    return () => document.removeEventListener("click", onDoc);
-  }, [dropOpen]);
 
   // Mobile menu: focus, Esc, focus trap, close on wide screens
   useEffect(() => {
@@ -100,6 +86,13 @@ export function Header() {
   }, [menuOpen]);
 
   const moreActive = MORE.some((m) => isCurrent(m.href));
+  const navLink = (n: (typeof PRIMARY)[number]) => (
+    <li key={n.href}>
+      <Link href={n.href} aria-current={isCurrent(n.href) ? "page" : undefined}>
+        {n.label}
+      </Link>
+    </li>
+  );
   const headerCls = ["site-header", light && "is-light", solid && "is-solid"].filter(Boolean).join(" ");
 
   return (
@@ -119,73 +112,18 @@ export function Header() {
             </Link>
             <nav className="nav-desktop" aria-label="Main">
               <ul>
-                {PRIMARY.map((n) => (
-                  <li key={n.href}>
-                    <Link href={n.href} aria-current={isCurrent(n.href) ? "page" : undefined}>
-                      {n.label}
-                    </Link>
-                  </li>
-                ))}
-                <li
-                  className="has-drop"
-                  ref={dropWrap}
-                  onMouseEnter={() => {
-                    if (closeTimer.current) clearTimeout(closeTimer.current);
-                    setDropOpen(true);
-                  }}
-                  onMouseLeave={() => {
-                    closeTimer.current = setTimeout(() => setDropOpen(false), 180);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Escape") {
-                      setDropOpen(false);
-                      dropBtn.current?.focus();
-                    }
-                  }}
-                  onBlur={(e) => {
-                    if (!dropWrap.current?.contains(e.relatedTarget as Node)) setDropOpen(false);
-                  }}
-                >
-                  <button
-                    ref={dropBtn}
-                    type="button"
-                    className={`drop-btn${moreActive ? " is-active" : ""}`}
-                    aria-expanded={dropOpen}
-                    aria-controls="drop-more"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setDropOpen((o) => !o);
-                    }}
-                  >
-                    More{" "}
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m6 9 6 6 6-6"
-                      />
-                    </svg>
-                  </button>
-                  <div className={`drop${dropOpen ? " is-open" : ""}`} id="drop-more">
-                    {MORE.map((n) => (
-                      <Link
-                        key={n.href}
-                        href={n.href}
-                        aria-current={isCurrent(n.href) ? "page" : undefined}
-                        onClick={() => setDropOpen(false)}
-                      >
-                        <TileIcon d={n.icon} />
-                        <span>
-                          <strong>{n.label}</strong>
-                          <small>{n.sub}</small>
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                </li>
+                {/* Same order as the old site: About, then Shop */}
+                {PRIMARY.slice(0, 2).map(navLink)}
+                <NavDrop
+                  id="drop-shop"
+                  label="Shop"
+                  items={SHOP}
+                  pathname={pathname}
+                  active={current === "/pages/shop"}
+                  isCurrent={isCurrent}
+                />
+                {PRIMARY.slice(2).map(navLink)}
+                <NavDrop id="drop-more" label="More" items={MORE} pathname={pathname} active={moreActive} isCurrent={isCurrent} />
               </ul>
             </nav>
             <div className="island__actions">

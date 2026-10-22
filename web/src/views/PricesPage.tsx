@@ -159,31 +159,27 @@ export default async function PricesPage() {
               Class passes, casual & <em>private sessions</em>
             </h2>
           </Reveal>{" "}
-          <Reveal className="passes passes--open">
-            {" "}
-            <PassesList groups={passes}>
-              <div className="fine-print">
-                {" "}
-                <ul>
-                  {" "}
-                  <li>
-                    Class passes start from date of first use. They can’t be shared, but may be transferred to another student
-                    ($35 admin fee per transfer).
-                  </li>{" "}
-                  <li>All fees are non-refundable.</li>{" "}
-                  <li>
-                    All students must sign the TYS Waiver form and tell us about any health issues or injuries before attending
-                    class.
-                  </li>{" "}
-                  <li>TYS reserves the right to make changes to the public class timetable as necessary.</li>{" "}
-                  <li>12- and 6-monthly memberships can only be renewed within 2 months of their expiry date.</li>{" "}
-                  <li>
-                    Memberships are subject to our <Link href="/pages/terms-and-conditions">Terms &amp; Conditions</Link>.
-                  </li>{" "}
-                </ul>{" "}
-              </div>
-            </PassesList>{" "}
-          </Reveal>{" "}
+          <PassesList groups={passes}>
+            <Reveal className="pass-terms">
+              <h3>Good to know</h3>
+              <ul>
+                <li>
+                  Class passes start from date of first use. They can’t be shared, but may be transferred to another student ($35
+                  admin fee per transfer).
+                </li>
+                <li>All fees are non-refundable.</li>
+                <li>
+                  All students must sign the TYS Waiver form and tell us about any health issues or injuries before attending
+                  class.
+                </li>
+                <li>TYS reserves the right to make changes to the public class timetable as necessary.</li>
+                <li>12- and 6-monthly memberships can only be renewed within 2 months of their expiry date.</li>
+                <li>
+                  Memberships are subject to our <Link href="/pages/terms-and-conditions">Terms &amp; Conditions</Link>.
+                </li>
+              </ul>
+            </Reveal>
+          </PassesList>{" "}
         </div>{" "}
       </section>{" "}
       <section className="section cta-band" aria-labelledby="cta-title">

@@ -22,7 +22,11 @@ const I = {
   contact: "M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21zM12 9.5h.01",
   shop: "M6 7h12l-1 13H7zM9 7a3 3 0 0 1 6 0",
   gift: "M4 8h16v12H4zM12 8v12M4 12h16M12 8S10.5 3 8 3.8C5.8 4.5 7 8 12 8zm0 0s1.5-5 4-4.2C18.2 4.5 17 8 12 8z",
+  ticket: "M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4zM14 7v10",
+  video: "M4 6h12v12H4zM16 10l4-2v8l-4-2",
 };
+export const MOMENCE_SHOP = "https://momence.com/The-Yoga-School/products/23652";
+export const MOMENCE_VIDEOS = "https://momence.com/video/plugin/23652";
 
 const N = (href: string, label: string, sub: string, icon: string): NavItem => ({ href, label, sub, icon });
 
@@ -38,6 +42,13 @@ export const PRIMARY: NavItem[] = [
   N("/pages/contact-us", "Contact", "Visit or call us", I.contact),
 ];
 
+/** "Shop" dropdown (same three links as the old site's Shop menu). Links starting with http open Momence in a new tab. */
+export const SHOP: NavItem[] = [
+  N("/pages/prices", "Class passes", "Passes & memberships", I.ticket),
+  N(MOMENCE_SHOP, "Props & equipment", "Mats, blocks, books · online shop", I.shop),
+  N(MOMENCE_VIDEOS, "On-demand videos", "Practise at home", I.video),
+];
+
 /** "More" dropdown */
 export const MORE: NavItem[] = [
   N("/pages/photo-gallery", "Gallery", "Inside the studio", I.gallery),
@@ -46,9 +57,8 @@ export const MORE: NavItem[] = [
   N("/pages/blog1", "Blog", "Reflections on practice", I.blog),
   N("/pages/faqs", "FAQs", "Good to know", I.faqs),
   N("/workplace-wellbeing", "Workplace", "Team wellbeing", I.workplace),
-  N("/pages/shop", "Shop", "Props & meditation seats", I.shop),
   N("/gift-vouchers", "Gift vouchers", "Give the gift of yoga", I.gift),
 ];
 
 /** Mobile menu tiles: everything, in a sensible order */
-export const TILES: NavItem[] = [...PRIMARY.slice(0, 7), ...MORE.slice(0, 6), PRIMARY[7], MORE[6], MORE[7]];
+export const TILES: NavItem[] = [...PRIMARY.slice(0, 7), ...MORE.slice(0, 6), PRIMARY[7], SHOP[1], SHOP[2], MORE[6]];

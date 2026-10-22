@@ -695,25 +695,6 @@ table.a-table {
 .a-stat__s--warn {
   color: var(--c-accent-ink);
 }
-.a-tips {
-  margin-top: 24px;
-  padding: 20px 24px;
-  border-radius: 16px;
-  background: var(--c-surface);
-  border: 1px solid var(--a-line);
-}
-.a-tips h2 {
-  font-size: 1.4rem;
-  margin: 0 0 8px;
-}
-.a-tips ul {
-  margin: 0;
-  padding-left: 20px;
-  display: grid;
-  gap: 6px;
-  font-size: var(--fs-sm);
-  color: var(--c-ink-soft);
-}
 
 dialog.a-dialog {
   width: min(820px, 100% - 24px);
@@ -866,4 +847,43 @@ dialog.a-dialog {
 .a-side .theme-toggle {
   width: 38px;
   height: 38px;
+}
+
+/* ---------- sign in: show / hide password ---------- */
+.a-pw {
+  position: relative;
+}
+.a-pw input {
+  width: 100%;
+  padding-right: 96px;
+}
+.a-card .a-pw__toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  min-height: 36px;
+  margin: 0;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 99px;
+  background: transparent;
+  color: var(--c-heading);
+  font: 600 0.8125rem var(--f-body);
+  cursor: pointer;
+}
+.a-card .a-pw__toggle:hover {
+  background: var(--c-light);
+}
+.a-card .a-pw__toggle:focus-visible {
+  outline: 2px solid var(--c-secondary);
+  outline-offset: 1px;
+}
+.a-pw__toggle svg {
+  width: 18px;
+  height: 18px;
 }

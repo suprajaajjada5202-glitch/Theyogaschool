@@ -1,7 +1,7 @@
-import { Fragment, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { Membership, PassGroup } from "@/lib/types";
 import { CtaLink } from "./CtaLink";
-import { Use } from "./Icons";
+import { TileIcon, Use } from "./Icons";
 import { Reveal } from "./Reveal";
 
 /** Membership cards (Supabase "prices" rows with category = membership, or built-in). */
@@ -45,31 +45,59 @@ function withPhone(text: string) {
   ));
 }
 
-/** Passes lists in two columns, then the fine print (children). */
+/** Outline icon for a pass group, picked from its title. */
+const PASS_ICONS: [RegExp, string][] = [
+  [/drop/i, "M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4V7Zm11 0v2m0 3v1m0 3v1"],
+  [/chair/i, "M7 3h10v9H7zM5 12h14M7 12v9m10-9v9M7 17h10"],
+  [/unlimited/i, "M12 12c-2-2.5-3.5-4-5.5-4a4 4 0 0 0 0 8c2 0 3.5-1.5 5.5-4Zm0 0c2 2.5 3.5 4 5.5 4a4 4 0 0 0 0-8c-2 0-3.5 1.5-5.5 4Z"],
+  [/private/i, "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-8 9a8 8 0 0 1 16 0"],
+];
+const PASS_ICON_DEFAULT = "M12 3 2 8l10 5 10-5-10-5ZM2 12.5l10 5 10-5M2 17l10 5 10-5";
+
+/** "180 days (max 3-week hold)" or "1 person: 60 / 90 min" → main label + detail line. */
+function splitName(name: string): [string, string | null] {
+  const m = name.match(/^(.+?)(?::\s+(.+)|\s+\((.+)\))$/);
+  return m ? [m[1], m[2] ?? m[3]] : [name, null];
+}
+
+/** Pass groups as a grid of cards (unlimited passes highlighted), then the fine print (children). */
 export function PassesList({ groups, children }: { groups: PassGroup[]; children?: ReactNode }) {
-  const half = Math.min(3, Math.ceil(groups.length / 2) + (groups.length > 4 ? 1 : 0));
-  const columns = [groups.slice(0, half), groups.slice(half)];
   return (
-    <div className="passes__body">
-      {columns.map((col, c) => (
-        <div className="price-list" key={c}>
-          {col.map((g) => (
-            <Fragment key={g.title}>
-              <h4>{g.title}</h4>
-              <ul>
-                {g.items.map((i) => (
-                  <li key={i.name}>
-                    <span>{i.name}</span>
-                    <span>{i.price}</span>
-                  </li>
-                ))}
+    <>
+      <div className="pass-grid">
+        {groups.map((g, n) => {
+          const featured = /unlimited/i.test(g.title);
+          return (
+            <Reveal
+              as="article"
+              key={g.title}
+              className={`pass-card${featured ? " pass-card--featured on-dark" : ""}`}
+              delay={n % 3 || undefined}
+            >
+              <header className="pass-card__head">
+                <TileIcon className="pass-card__ic" d={PASS_ICONS.find(([re]) => re.test(g.title))?.[1] ?? PASS_ICON_DEFAULT} />
+                <h3>{g.title}</h3>
+              </header>
+              <ul className="pass-card__list">
+                {g.items.map((i) => {
+                  const [label, detail] = splitName(i.name);
+                  return (
+                    <li key={i.name}>
+                      <span className="pass-card__name">
+                        {label}
+                        {detail && <small>{detail}</small>}
+                      </span>
+                      <span className="pass-card__price">{i.price}</span>
+                    </li>
+                  );
+                })}
               </ul>
-              {g.note && <small>{withPhone(g.note)}</small>}
-            </Fragment>
-          ))}
-        </div>
-      ))}
+              {g.note && <p className="pass-card__note">{withPhone(g.note)}</p>}
+            </Reveal>
+          );
+        })}
+      </div>
       {children}
-    </div>
+    </>
   );
 }
