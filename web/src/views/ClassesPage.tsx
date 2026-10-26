@@ -8,6 +8,8 @@ import { getClasses } from "@/lib/data";
 
 export default async function ClassesPage() {
   const [classes] = await Promise.all([getClasses()]);
+  // "Level N" class section, whatever web address name it was given in /admin
+  const levelHref = (n: number) => `#class-${classes.find((c) => new RegExp(`^level ${n}\\b`, "i").test(c.name))?.slug ?? `l${n}`}`;
   return (
     <>
       {" "}
@@ -97,22 +99,22 @@ export default async function ClassesPage() {
           </Reveal>{" "}
           <Reveal className="path">
             {" "}
-            <a href="#class-l1">
+            <a href={levelHref(1)}>
               <b>1</b>
               <span>Introduction</span>
               <small>Absolute beginners and a slower practice</small>
             </a>{" "}
-            <a href="#class-l2">
+            <a href={levelHref(2)}>
               <b>2</b>
               <span>Building</span>
               <small>Vinyasa, heat, strength and focus</small>
             </a>{" "}
-            <a href="#class-l3">
+            <a href={levelHref(3)}>
               <b>3</b>
               <span>Deepening</span>
               <small>More demanding postures and skill</small>
             </a>{" "}
-            <a href="#class-l4">
+            <a href={levelHref(4)}>
               <b>4</b>
               <span>Advanced</span>
               <small>Inversions and stronger Asana groups</small>
@@ -125,7 +127,6 @@ export default async function ClassesPage() {
         <div className="container">
           {" "}
           <ClassJump classes={classes} />{" "}
-          {/* PLACEHOLDER: "[Duration]" chips. Other durations are from the live Momence timetable (Oct 2026). */}{" "}
           <ClassRows classes={classes} />{" "}
         </div>{" "}
       </section>{" "}

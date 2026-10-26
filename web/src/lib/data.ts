@@ -1,7 +1,7 @@
 /* Server-side content loaders. Each reads Supabase (refreshed every 60 s) and falls back to
    the built-in content from src/data/content.ts when Supabase is not set up or a table is empty. */
 import * as fallback from "@/data/content";
-import { getShopProducts, MOMENCE_SHOP_URL } from "./momence";
+import { getMomenceEventSummary, getShopProducts, momenceSessionId, MOMENCE_SHOP_URL } from "./momence";
 import { selectRows } from "./supabase";
 import type { ClassItem, EventItem, Membership, PassGroup, Post, Product, TimetableRow, Voucher } from "./types";
 
@@ -24,19 +24,28 @@ type DbClass = {
   tag: string | null;
   image_url: string | null;
 };
+/** Card text: the first sentence, cut at a word if it runs long. */
+function firstSentence(text: string) {
+  const s = text.split(/(?<=[.!?])\s+/)[0].trim();
+  return s.length > 160 ? `${s.slice(0, 160).replace(/\s+\S*$/, "")}…` : s;
+}
 export async function getClasses(): Promise<ClassItem[]> {
   const rows = await selectRows<DbClass>("classes", "select=*&published=eq.true&order=sort.asc");
   if (!rows?.length) return fallback.classes;
-  return rows.map((c) => ({
-    slug: c.slug,
-    name: c.name,
-    level: c.level ?? "",
-    duration: c.duration || null,
-    summary: c.summary ?? "",
-    description: paras(c.description),
-    tag: c.tag || null,
-    image: img(c.image_url, `${c.name} class at The Yoga School`),
-  }));
+  return rows.map((c) => {
+    // /admin has one Description field; older rows may only have the retired "Short description" (summary)
+    const description = paras(c.description || c.summary);
+    return {
+      slug: c.slug,
+      name: c.name,
+      level: c.level ?? "",
+      duration: c.duration || null,
+      summary: firstSentence(description[0] ?? ""),
+      description,
+      tag: c.tag || null,
+      image: img(c.image_url, `${c.name} class at The Yoga School`),
+    };
+  });
 }
 
 type DbTime = {
@@ -112,12 +121,15 @@ const GROUPS: [string, string][] = [
 export async function getPasses(): Promise<PassGroup[]> {
   const rows = (await prices())?.filter((p) => p.category !== "membership" && p.category !== "other");
   if (!rows?.length) return fallback.passes;
+  // Buy link: the row's "Button link" from /admin, else the built-in Momence checkout link for the same pass
+  const builtInUrl = (title: string, name: string) =>
+    fallback.passes.find((g) => g.title === title)?.items.find((i) => i.name === name)?.url ?? null;
   return GROUPS.map(([cat, title]) => {
     const items = rows.filter((r) => r.category === cat);
     const notes = items.map((i) => i.description).filter(Boolean);
     return {
       title,
-      items: items.map((i) => ({ name: i.name, price: priceText(i) })),
+      items: items.map((i) => ({ name: i.name, price: priceText(i), url: i.cta_url || builtInUrl(title, i.name) })),
       note: notes.length ? notes.join(" ") : null,
     };
   }).filter((g) => g.items.length);
@@ -141,19 +153,23 @@ export async function getEvents(): Promise<EventItem[]> {
     `select=*&published=eq.true&starts_at=gte.${encodeURIComponent(since)}&order=starts_at.asc&limit=48`,
   );
   const now = Date.now();
-  return (rows ?? [])
-    .filter((e) => new Date(e.ends_at ?? e.starts_at).getTime() >= now)
-    .slice(0, 24)
-    .map((e) => ({
-      id: e.id,
-      title: e.title,
-      startsAt: e.starts_at,
-      endsAt: e.ends_at,
-      teacher: e.teacher,
-      priceLabel: e.price_label,
-      description: e.description,
-      bookUrl: e.book_url,
-    }));
+  const upcoming = (rows ?? []).filter((e) => new Date(e.ends_at ?? e.starts_at).getTime() >= now).slice(0, 24);
+  return Promise.all(
+    upcoming.map(async (e) => {
+      // No description in /admin: show the event's summary from Momence, as the old site did
+      const sessionId = e.description?.trim() ? null : momenceSessionId(e.book_url);
+      return {
+        id: e.id,
+        title: e.title,
+        startsAt: e.starts_at,
+        endsAt: e.ends_at,
+        teacher: e.teacher,
+        priceLabel: e.price_label,
+        description: sessionId ? (await getMomenceEventSummary(sessionId)) || null : e.description,
+        bookUrl: e.book_url,
+      };
+    }),
+  );
 }
 
 type DbPost = {

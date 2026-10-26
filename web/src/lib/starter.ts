@@ -52,7 +52,6 @@ export async function starterRows(table: ContentTable, classSlugs: Set<string>):
         name: c.name,
         level: c.level || null,
         duration: c.duration,
-        summary: c.summary,
         description: c.description.join("\n\n"),
         tag: c.tag,
         image_url: c.image?.src ?? null,
@@ -157,6 +156,7 @@ export async function starterRows(table: ContentTable, classSlugs: Set<string>):
           // Momence uses $999-style placeholders for "book direct" events: leave those blank
           price_label: s.free ? "Free" : s.price != null && s.price < 500 ? `$${s.price}` : null,
           image_url: s.image,
+          description: s.description || null,
           book_url: s.link,
           published: true,
         }));

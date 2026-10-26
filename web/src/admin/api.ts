@@ -18,4 +18,6 @@ export async function adminPost<T = unknown>(path: string, body: unknown): Promi
 export const refreshWebsite = (table: string) => adminPost("/api/admin/revalidate", { table }).catch(() => undefined);
 
 export type ImportResult = { table: string; status: "imported" | "skipped" | "error"; count: number; message?: string };
-export const importContent = (tables?: string[]) => adminPost<{ results: ImportResult[] }>("/api/admin/import", { tables });
+/** missing: also top up sections that already have content with the built-in items they're missing. */
+export const importContent = (tables?: string[], missing = false) =>
+  adminPost<{ results: ImportResult[] }>("/api/admin/import", { tables, missing });

@@ -6,6 +6,18 @@ const TZ = "Australia/Brisbane"; // Cairns time
 const fmt = (d: string, o: Intl.DateTimeFormatOptions) =>
   new Intl.DateTimeFormat("en-AU", { timeZone: TZ, ...o }).format(new Date(d));
 
+/** Text with its web addresses turned into links (e.g. "Book directly through Kat … https://events.humanitix.com/…"). */
+const linkify = (text: string) =>
+  text.split(/(https?:\/\/[^\s<]*[^\s<.,;:!?)'"])/g).map((part, i) =>
+    i % 2 ? (
+      <a key={i} href={part} target="_blank" rel="noopener">
+        {part}
+      </a>
+    ) : (
+      part
+    ),
+  );
+
 /** Upcoming events from Supabase. Nothing is shown when there are none (the Momence widget below still lists workshops). */
 export function UpcomingEvents({ events }: { events: EventItem[] }) {
   if (!events.length) return null;
@@ -31,9 +43,15 @@ export function UpcomingEvents({ events }: { events: EventItem[] }) {
                     .split(/\n\s*\n/)
                     .filter(Boolean)
                     .map((p, i) => (
-                      <p key={i}>{p}</p>
+                      <p key={i}>{linkify(p)}</p>
                     ))}
                 </div>
+                {e.bookUrl && (
+                  <a className="link-arrow" href={e.bookUrl} target="_blank" rel="noopener">
+                    More information <Use id="i-arrow" />
+                    <span className="sr-only">: {e.title}</span>
+                  </a>
+                )}
               </div>
               {e.bookUrl && (
                 <a className="btn btn--primary btn--sm" href={e.bookUrl} target="_blank" rel="noopener">

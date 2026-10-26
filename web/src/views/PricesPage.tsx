@@ -98,7 +98,7 @@ export default async function PricesPage() {
               {" "}
               <img
                 decoding="async"
-                src="https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/home-banner.png"
+                src="/images/offer-banner.png"
                 alt="Introduction offer, 30 days for $99. Knoff Yoga, Yin Yoga, Chair Yoga, Strength and Mobility classes"
                 width="708"
                 height="263"
@@ -149,7 +149,7 @@ export default async function PricesPage() {
       <svg className="wave " viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true">
         <path fill="currentColor" d="M0 48h1440V20c-120 18-240 28-360 20S840 6 720 6 480 30 360 34 120 22 0 12z" />
       </svg>{" "}
-      <section className="section section--tint" style={{ paddingTop: "var(--s-6)" }} aria-labelledby="passes-title">
+      <section id="passes" className="section section--tint" style={{ paddingTop: "var(--s-6)" }} aria-labelledby="passes-title">
         {" "}
         <div className="container">
           {" "}
@@ -173,13 +173,24 @@ export default async function PricesPage() {
                   class.
                 </li>
                 <li>TYS reserves the right to make changes to the public class timetable as necessary.</li>
-                <li>12- and 6-monthly memberships can only be renewed within 2 months of their expiry date.</li>
+                <li>
+                  12- and 6-monthly memberships can only be renewed within 2 months of their expiry date, to ensure fair access for
+                  all students. Thank you for your understanding.
+                </li>
                 <li>
                   Memberships are subject to our <Link href="/pages/terms-and-conditions">Terms &amp; Conditions</Link>.
                 </li>
               </ul>
             </Reveal>
           </PassesList>{" "}
+          <Reveal className="section-foot">
+            <Link className="btn btn--outline" href="/pages/teacher-training">
+              Learn about our Teacher Training courses{" "}
+              <svg aria-hidden="true">
+                <use href="#i-arrow" />
+              </svg>
+            </Link>
+          </Reveal>{" "}
         </div>{" "}
       </section>{" "}
       <section className="section cta-band" aria-labelledby="cta-title">

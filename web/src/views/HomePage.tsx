@@ -5,18 +5,22 @@ import { MomentsStrip } from "@/components/MomentsStrip";
 import { PostGrid } from "@/components/PostGrid";
 import { MembershipCards } from "@/components/Prices";
 import { Reveal } from "@/components/Reveal";
+import { ClassCards } from "@/components/ClassRows";
+import { LocateUs } from "@/components/LocateUs";
+import { QuickLinks } from "@/components/QuickLinks";
 import { SliderBar, SliderNav, SliderTrack } from "@/components/Slider";
 import { TestimonialSlider } from "@/components/TestimonialSlider";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { seo } from "@/lib/seo";
-import { getMemberships, getPosts, getProducts } from "@/lib/data";
+import { getClasses, getMemberships, getPosts, getProducts } from "@/lib/data";
 import { getUpcomingClasses } from "@/lib/momence";
 import { UpcomingClasses } from "@/components/UpcomingClasses";
 import { ShopBanner } from "@/components/ShopBanner";
 
 export default async function HomePage() {
-  const [memberships, posts, upcoming, products] = await Promise.all([
+  const [classes, memberships, posts, upcoming, products] = await Promise.all([
+    getClasses(),
     getMemberships(),
     getPosts(),
     getUpcomingClasses(10),
@@ -52,6 +56,7 @@ export default async function HomePage() {
           </ul>{" "}
         </div>{" "}
       </div>{" "}
+      <QuickLinks />
       <UpcomingClasses classes={upcoming} />{" "}
       <section className="section clip-x" aria-labelledby="intro-title">
         {" "}
@@ -145,406 +150,14 @@ export default async function HomePage() {
               </h2>
               <p className="lead">4 levels of study and 20 classes a week. Students of every level of experience can benefit.</p>
             </div>
-            <SliderNav target="classes-track" prevLabel="Previous classes" nextLabel="Next classes">
+            <SliderNav target="classes-track" prevLabel="Previous classes" nextLabel="Next classes" pauseLabel="Pause classes">
               {" "}
             </SliderNav>
           </Reveal>{" "}
           <Reveal className="slider">
             {" "}
-            {/* PLACEHOLDER: "[Duration]" chips. Durations shown elsewhere were taken from the live Momence timetable (Oct 2026). */}{" "}
-            <SliderTrack id="classes-track" label="Classes, scroll horizontally">
-              {" "}
-              <li className="slide">
-                {" "}
-                <article className="card">
-                  {" "}
-                  <div className="card__media">
-                    <img
-                      decoding="async"
-                      src="/images/gallery/DSC00112.jpg"
-                      alt="Students kneeling on their mats at the start of a class"
-                      width="2308"
-                      height="1299"
-                      loading="lazy"
-                    />
-                    <span className="card__tag">Start here</span>
-                  </div>{" "}
-                  <div className="card__body">
-                    {" "}
-                    <h3>Level 1</h3>{" "}
-                    <p>Introduction to Yoga. Perfect for absolute beginners and anyone wanting a slower practice.</p>{" "}
-                    <div className="card__meta">
-                      {" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-level" />
-                        </svg>
-                        Beginners
-                      </span>{" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-clock" />
-                        </svg>
-                        <span className="ph">[Duration]</span>
-                      </span>{" "}
-                    </div>{" "}
-                    <Link className="link-arrow" href="/pages/classes#class-l1">
-                      Class details{" "}
-                      <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                      </svg>
-                      <span className="sr-only">: Level 1</span>
-                    </Link>{" "}
-                  </div>{" "}
-                </article>{" "}
-              </li>{" "}
-              <li className="slide">
-                {" "}
-                <article className="card">
-                  {" "}
-                  <div className="card__media">
-                    <img
-                      decoding="async"
-                      src="/images/gallery/DSC00140.jpg"
-                      alt="Students holding plank pose in a vinyasa sequence"
-                      width="2149"
-                      height="1395"
-                      loading="lazy"
-                    />
-                  </div>{" "}
-                  <div className="card__body">
-                    {" "}
-                    <h3>Level 2</h3>{" "}
-                    <p>A quicker pace using Vinyasa to build upper-body strength, create heat and focus the mind.</p>{" "}
-                    <div className="card__meta">
-                      {" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-level" />
-                        </svg>
-                        Some experience
-                      </span>{" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-clock" />
-                        </svg>
-                        60–75 min
-                      </span>{" "}
-                    </div>{" "}
-                    <Link className="link-arrow" href="/pages/classes#class-l2">
-                      Class details{" "}
-                      <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                      </svg>
-                      <span className="sr-only">: Level 2</span>
-                    </Link>{" "}
-                  </div>{" "}
-                </article>{" "}
-              </li>{" "}
-              <li className="slide">
-                {" "}
-                <article className="card">
-                  {" "}
-                  <div className="card__media">
-                    <img
-                      decoding="async"
-                      src="/images/gallery/DSC00183.jpg"
-                      alt="A student in a strong revolved triangle pose"
-                      width="2049"
-                      height="1464"
-                      loading="lazy"
-                    />
-                  </div>{" "}
-                  <div className="card__body">
-                    {" "}
-                    <h3>Level 3</h3>{" "}
-                    <p>More demanding postures to increase your proficiency and skill in every area of practice.</p>{" "}
-                    <div className="card__meta">
-                      {" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-level" />
-                        </svg>
-                        Intermediate
-                      </span>{" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-clock" />
-                        </svg>
-                        90 min
-                      </span>{" "}
-                    </div>{" "}
-                    <Link className="link-arrow" href="/pages/classes#class-l3">
-                      Class details{" "}
-                      <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                      </svg>
-                      <span className="sr-only">: Level 3</span>
-                    </Link>{" "}
-                  </div>{" "}
-                </article>{" "}
-              </li>{" "}
-              <li className="slide">
-                {" "}
-                <article className="card">
-                  {" "}
-                  <div className="card__media">
-                    <img
-                      decoding="async"
-                      src="/images/gallery/DSC00075edit.jpg"
-                      alt="Students practising headstands and other inversions"
-                      width="3677"
-                      height="2626"
-                      loading="lazy"
-                    />
-                  </div>{" "}
-                  <div className="card__body">
-                    {" "}
-                    <h3>Level 4</h3>{" "}
-                    <p>Inversions and stronger versions of the other Asana groups. Level 3 competency recommended.</p>{" "}
-                    <div className="card__meta">
-                      {" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-level" />
-                        </svg>
-                        Advanced
-                      </span>{" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-clock" />
-                        </svg>
-                        <span className="ph">[Duration]</span>
-                      </span>{" "}
-                    </div>{" "}
-                    <Link className="link-arrow" href="/pages/classes#class-l4">
-                      Class details{" "}
-                      <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                      </svg>
-                      <span className="sr-only">: Level 4</span>
-                    </Link>{" "}
-                  </div>{" "}
-                </article>{" "}
-              </li>{" "}
-              <li className="slide">
-                {" "}
-                <article className="card">
-                  {" "}
-                  <div className="card__media">
-                    <img
-                      decoding="async"
-                      src="/images/gallery/DSC00131.jpg"
-                      alt="A mixed class of students in warrior and triangle poses"
-                      width="2308"
-                      height="1299"
-                      loading="lazy"
-                    />
-                    <span className="card__tag">Everyone welcome</span>
-                  </div>{" "}
-                  <div className="card__body">
-                    {" "}
-                    <h3>All Levels & Combined</h3>{" "}
-                    <p>Easier Asanas first, with more challenging options. Practise at the level that suits you today.</p>{" "}
-                    <div className="card__meta">
-                      {" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-level" />
-                        </svg>
-                        All levels
-                      </span>{" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-clock" />
-                        </svg>
-                        60–75 min
-                      </span>{" "}
-                    </div>{" "}
-                    <Link className="link-arrow" href="/pages/classes#class-all">
-                      Class details{" "}
-                      <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                      </svg>
-                      <span className="sr-only">: All Levels & Combined</span>
-                    </Link>{" "}
-                  </div>{" "}
-                </article>{" "}
-              </li>{" "}
-              <li className="slide">
-                {" "}
-                <article className="card">
-                  {" "}
-                  <div className="card__media">
-                    <img
-                      decoding="async"
-                      src="/images/gallery/DSC00193.jpg"
-                      alt="A student kneeling quietly on a mat"
-                      width="1299"
-                      height="2308"
-                      loading="lazy"
-                    />
-                  </div>{" "}
-                  <div className="card__body">
-                    {" "}
-                    <h3>Yin Yoga</h3>{" "}
-                    <p>A quiet, passive practice targeting deep connective tissues, fascia, joints and bones.</p>{" "}
-                    <div className="card__meta">
-                      {" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-level" />
-                        </svg>
-                        All levels
-                      </span>{" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-clock" />
-                        </svg>
-                        60 min
-                      </span>{" "}
-                    </div>{" "}
-                    <Link className="link-arrow" href="/pages/classes#class-yin">
-                      Class details{" "}
-                      <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                      </svg>
-                      <span className="sr-only">: Yin Yoga</span>
-                    </Link>{" "}
-                  </div>{" "}
-                </article>{" "}
-              </li>{" "}
-              <li className="slide">
-                {" "}
-                <article className="card">
-                  {" "}
-                  <div className="card__media">
-                    <img
-                      decoding="async"
-                      src="/images/gallery/DSC00203.jpg"
-                      alt="A student seated comfortably on a mat in the studio"
-                      width="1299"
-                      height="2308"
-                      loading="lazy"
-                    />
-                  </div>{" "}
-                  <div className="card__body">
-                    {" "}
-                    <h3>Chair Yoga</h3>{" "}
-                    <p>For seniors and students with limited mobility, balance or joint challenges, or in recovery.</p>{" "}
-                    <div className="card__meta">
-                      {" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-level" />
-                        </svg>
-                        Gentle
-                      </span>{" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-clock" />
-                        </svg>
-                        <span className="ph">[Duration]</span>
-                      </span>{" "}
-                    </div>{" "}
-                    <Link className="link-arrow" href="/pages/classes#class-chair">
-                      Class details{" "}
-                      <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                      </svg>
-                      <span className="sr-only">: Chair Yoga</span>
-                    </Link>{" "}
-                  </div>{" "}
-                </article>{" "}
-              </li>{" "}
-              <li className="slide">
-                {" "}
-                <article className="card">
-                  {" "}
-                  <div className="card__media">
-                    <img
-                      decoding="async"
-                      src="/images/gallery/DSC00184.jpg"
-                      alt="A class standing in a wide-legged pose"
-                      width="2308"
-                      height="1299"
-                      loading="lazy"
-                    />
-                    <span className="card__tag">New</span>
-                  </div>{" "}
-                  <div className="card__body">
-                    {" "}
-                    <h3>Shoshin Strength & Mobility</h3>{" "}
-                    <p>Strength classes and mobility classes, included in Shoshin Only and Everything memberships.</p>{" "}
-                    <div className="card__meta">
-                      {" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-level" />
-                        </svg>
-                        All levels
-                      </span>{" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-clock" />
-                        </svg>
-                        60 min
-                      </span>{" "}
-                    </div>{" "}
-                    <Link className="link-arrow" href="/pages/classes#class-shoshin">
-                      Class details{" "}
-                      <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                      </svg>
-                      <span className="sr-only">: Shoshin Strength & Mobility</span>
-                    </Link>{" "}
-                  </div>{" "}
-                </article>{" "}
-              </li>{" "}
-              <li className="slide">
-                {" "}
-                <article className="card">
-                  {" "}
-                  <div className="card__media">
-                    <img
-                      decoding="async"
-                      src="/images/gallery/DSC00019edit.jpg"
-                      alt="A teacher giving a student a hands-on adjustment"
-                      width="5472"
-                      height="3080"
-                      loading="lazy"
-                    />
-                    <span className="card__tag">One-on-one</span>
-                  </div>{" "}
-                  <div className="card__body">
-                    {" "}
-                    <h3>Private Sessions</h3>{" "}
-                    <p>One-on-one and small-group sessions for technique and specific health challenges.</p>{" "}
-                    <div className="card__meta">
-                      {" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-level" />
-                        </svg>
-                        Tailored
-                      </span>{" "}
-                      <span className="chip">
-                        <svg aria-hidden="true">
-                          <use href="#i-clock" />
-                        </svg>
-                        60 or 90 min
-                      </span>{" "}
-                    </div>{" "}
-                    <Link className="link-arrow" href="/pages/classes#class-private">
-                      Class details{" "}
-                      <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                      </svg>
-                      <span className="sr-only">: Private Sessions</span>
-                    </Link>{" "}
-                  </div>{" "}
-                </article>{" "}
-              </li>{" "}
+            <SliderTrack id="classes-track" label="Classes, scroll horizontally" auto={4000}>
+              <ClassCards classes={classes} />
             </SliderTrack>{" "}
             <div className="slider-foot">
               <SliderBar target="classes-track" />
@@ -676,20 +289,20 @@ export default async function HomePage() {
                 Highlights at <em>The Yoga School</em>
               </h2>{" "}
             </div>{" "}
-            <SliderNav target="hl-track" prevLabel="Previous highlight" nextLabel="Next highlight">
+            <SliderNav target="hl-track" prevLabel="Previous highlight" nextLabel="Next highlight" pauseLabel="Pause highlights">
               {" "}
             </SliderNav>{" "}
           </Reveal>{" "}
           <Reveal className="slider slider--1" aria-roledescription="carousel" aria-label="Highlights">
             {" "}
-            <SliderTrack id="hl-track" label="">
+            <SliderTrack id="hl-track" label="" auto={5000}>
               {" "}
               <li className="slide hl" aria-roledescription="slide" aria-label="1 of 5">
                 {" "}
                 <div className="hl__media hl__media--contain">
                   <img
                     decoding="async"
-                    src="https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/home-banner.png"
+                    src="/images/offer-banner.png"
                     alt="Introduction offer, 30 days for $99"
                     width="708"
                     height="263"
@@ -1320,6 +933,7 @@ export default async function HomePage() {
           </div>{" "}
         </Reveal>{" "}
       </section>{" "}
+      <LocateUs />
       <JsonLd data={seo("home").jsonLd} />
     </>
   );

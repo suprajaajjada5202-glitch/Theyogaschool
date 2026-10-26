@@ -1,14 +1,16 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { useBodyLock } from "@/hooks/useBodyLock";
-import { LOGO, MORE, OFFER_URL, PRIMARY, SHOP, TILES } from "@/lib/site";
+import { flatNav, LOGO, MORE, NAV, OFFER_URL, TILES, type NavEntry } from "@/lib/site";
 import { TileIcon, Use } from "./Icons";
 import { NavDrop } from "./NavDrop";
 import { ThemeToggle } from "./ThemeToggle";
 
 const HOME_PATHS = ["/", "/home", "/pages/home"];
+
+const TOP_HREFS = new Set(NAV.map((n) => n.href));
 
 /** Floating glass header, "More" dropdown, slide-in menu, scroll progress and back-to-top. */
 export function Header() {
@@ -18,13 +20,82 @@ export function Header() {
   const isCurrent = (href: string) => href === current;
 
   const [solid, setSolid] = useState(light);
+  // The bar sits below the top band until the band scrolls away (null until measured: CSS places it then)
+  const [shift, setShift] = useState<number | null>(null);
+  const topbar = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleBtn = useRef<HTMLButtonElement>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
+  const navList = useRef<HTMLUListElement>(null);
+  // How many bar entries fit; the rest move into "More". null until measured (the bar shows what fits, faded at the edge).
+  const [fit, setFit] = useState<number | null>(null);
+  // Logo without its name, so more entries fit (used whenever the full logo would push entries into "More")
+  const [compact, setCompact] = useState(false);
   useBodyLock(menuOpen);
+
+  // Measure which entries fit the bar (the space between the logo and the buttons, less "More"):
+  // on load, on resize and once the web fonts are in
+  useLayoutEffect(() => {
+    const ul = navList.current;
+    const nav = ul?.parentElement;
+    const island = nav?.parentElement;
+    const brand = island?.querySelector<HTMLElement>(".brand");
+    const actions = island?.querySelector<HTMLElement>(".island__actions");
+    if (!ul || !nav || !island || !brand || !actions) return;
+    const measure = () => {
+      if (getComputedStyle(nav).display === "none") {
+        setCompact(false); // phones / tablets use the menu button, with the full logo
+        return;
+      }
+      // Lay every entry out, and the logo with and without its name, for a moment (same frame, nothing is
+      // painted) to read their widths
+      const wasCompact = island.classList.contains("is-compact");
+      ul.classList.add("is-sizing");
+      const widths = ([...ul.children] as HTMLElement[]).map((li) => li.offsetWidth);
+      island.classList.remove("is-compact");
+      const fullLogo = brand.offsetWidth;
+      island.classList.add("is-compact");
+      const smallLogo = brand.offsetWidth;
+      island.classList.toggle("is-compact", wasCompact);
+      ul.classList.remove("is-sizing");
+      const bar = getComputedStyle(island);
+      const room =
+        island.clientWidth -
+        parseFloat(bar.paddingLeft) -
+        parseFloat(bar.paddingRight) -
+        2 * (parseFloat(bar.columnGap) || 0) -
+        actions.offsetWidth -
+        (nav.lastElementChild as HTMLElement).offsetWidth; // "More"
+      const gap = parseFloat(getComputedStyle(ul).columnGap) || 0;
+      const count = (space: number) => {
+        let used = 0;
+        let n = 0;
+        for (const w of widths) {
+          if (used + (n ? gap : 0) + w > space - 1) break;
+          used += (n ? gap : 0) + w;
+          n++;
+        }
+        return n;
+      };
+      const full = count(room - fullLogo);
+      setCompact(full < widths.length);
+      setFit(full < widths.length ? count(room - smallLogo) : full);
+    };
+    measure();
+    // The bar, and everything in it that isn't an entry: if styles arrive late (logo, buttons, "More" change size),
+    // the first measurement would wrongly push every entry into "More"
+    const ro = new ResizeObserver(measure);
+    for (const el of [island, ...island.children, nav.lastElementChild]) if (el && el !== nav) ro.observe(el);
+    document.fonts?.ready.then(measure);
+    window.addEventListener("load", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("load", measure);
+    };
+  }, []);
 
   // Scroll: solid header, progress bar, back-to-top. The header always stays on screen.
   useEffect(() => {
@@ -33,6 +104,7 @@ export function Header() {
       const y = window.scrollY;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setSolid(light || y > 40);
+      setShift(Math.max(0, (topbar.current?.offsetHeight ?? 0) - y));
       setProgress(max > 0 ? y / max : 0);
       setShowTop(y > window.innerHeight);
       ticking = false;
@@ -75,7 +147,7 @@ export function Header() {
         }
       }
     };
-    const onResize = () => window.innerWidth >= 1280 && setMenuOpen(false);
+    const onResize = () => window.innerWidth >= 1024 && setMenuOpen(false);
     document.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
     return () => {
@@ -85,25 +157,61 @@ export function Header() {
     };
   }, [menuOpen]);
 
-  const moreActive = MORE.some((m) => isCurrent(m.href));
-  const navLink = (n: (typeof PRIMARY)[number]) => (
-    <li key={n.href}>
-      <Link href={n.href} aria-current={isCurrent(n.href) ? "page" : undefined}>
-        {n.label}
-      </Link>
-    </li>
-  );
+  const shown = fit ?? NAV.length;
+  const moreItems = flatNav([...NAV.slice(shown), ...MORE]);
+  const moreActive = moreItems.some((m) => isCurrent(m.href));
+  const navEntry = (n: NavEntry, i: number) => {
+    const cls = i >= shown ? "is-overflow" : undefined;
+    if (!n.children)
+      return (
+        <li key={n.href} className={cls}>
+          <Link href={n.href} aria-current={isCurrent(n.href) ? "page" : undefined}>
+            {n.label}
+          </Link>
+        </li>
+      );
+    // A dropdown is active on its own page and on pages that only it links to (About: Teachers, Gallery)
+    const active = isCurrent(n.href) || n.children.some((c) => isCurrent(c.href) && !TOP_HREFS.has(c.href));
+    return (
+      <NavDrop
+        key={n.href}
+        id={`drop-${n.label.toLowerCase()}`}
+        label={n.label}
+        items={n.children}
+        pathname={pathname}
+        active={active}
+        isCurrent={isCurrent}
+        className={cls}
+        href={n.href}
+      />
+    );
+  };
   const headerCls = ["site-header", light && "is-light", solid && "is-solid"].filter(Boolean).join(" ");
 
   return (
     <>
+      {/* The old site's top band: tagline, FAQs and the new student offer */}
+      <div className="topbar on-dark" ref={topbar}>
+        <div className="container topbar__inner">
+          <p className="topbar__tagline">Stretch your body, calm your mind</p>
+          <nav className="topbar__links" aria-label="Quick links">
+            <Link href="/pages/faqs" aria-current={isCurrent("/pages/faqs") ? "page" : undefined}>
+              FAQs
+            </Link>
+            <a href={OFFER_URL} target="_blank" rel="noopener">
+              New Student Offer<span className="sr-only"> (opens Momence in a new tab)</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
       <div className="progress" aria-hidden="true">
         <span style={{ transform: `scaleX(${progress})` }}></span>
       </div>
 
-      <header className={headerCls}>
+      <header className={headerCls} style={shift === null ? undefined : ({ "--topbar-shift": `${shift}px` } as CSSProperties)}>
         <div className="container">
-          <div className="island">
+          <div className={`island${compact ? " is-compact" : ""}`}>
             <Link className="brand" href="/pages/home" aria-label="The Yoga School, home">
               <img src={LOGO} alt="The Yoga School logo" width={180} height={180} />
               <span className="brand-text">
@@ -111,19 +219,11 @@ export function Header() {
               </span>
             </Link>
             <nav className="nav-desktop" aria-label="Main">
+              <ul className={`nav-list${fit === null ? " is-measuring" : ""}`} ref={navList}>
+                {NAV.map(navEntry)}
+              </ul>
               <ul>
-                {/* Same order as the old site: About, then Shop */}
-                {PRIMARY.slice(0, 2).map(navLink)}
-                <NavDrop
-                  id="drop-shop"
-                  label="Shop"
-                  items={SHOP}
-                  pathname={pathname}
-                  active={current === "/pages/shop"}
-                  isCurrent={isCurrent}
-                />
-                {PRIMARY.slice(2).map(navLink)}
-                <NavDrop id="drop-more" label="More" items={MORE} pathname={pathname} active={moreActive} isCurrent={isCurrent} />
+                <NavDrop id="drop-more" label="More" items={moreItems} pathname={pathname} active={moreActive} isCurrent={isCurrent} />
               </ul>
             </nav>
             <div className="island__actions">

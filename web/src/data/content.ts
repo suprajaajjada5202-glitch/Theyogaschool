@@ -2,6 +2,7 @@
 export { posts } from "./posts";
 import type {
   ClassItem,
+  FeaturedTestimonial,
   GalleryPhoto,
   Img,
   Membership,
@@ -10,7 +11,7 @@ import type {
   Product,
   ShortTestimonial,
   Teacher,
-  Testimonial,
+  TestimonialChapter,
   Video,
 } from "@/lib/types";
 
@@ -643,7 +644,7 @@ export const classes: ClassItem[] = [
     slug: "l1",
     name: "Level 1",
     level: "Beginners",
-    duration: null,
+    duration: "60–75 min",
     summary: "Introduction to Yoga. Perfect for absolute beginners and anyone wanting a slower practice.",
     description: [
       "The perfect way to start yoga, this entry level class is suitable for absolute beginners and anyone wanting a slower practice with time to explore the postures and foundations of yoga in detail.  Move up to the higher levels whenever you feel ready, or stay here for as long as you like.  You will often see some regulars and more advanced yogis in this class, as coming back to the fundamentals of this practice is essential for progression.",
@@ -901,127 +902,195 @@ export const sliderTestimonials: ShortTestimonial[] = [
   },
 ];
 
-export const testimonials: Testimonial[] = [
+/* Testimonials page. Stories are the students' own words (only run-together sentences and paragraph breaks tidied).
+   "highlight" is a line quoted from the story and set large above it; stories without one are short enough to show
+   whole as the quote. */
+export const featuredTestimonial: FeaturedTestimonial = {
+  name: "CeCelia Roupe",
+  role: "Student",
+  highlight: "It was the best thing I’ve ever done for myself.",
+  paragraphs: [
+    "I cannot recommend The Yoga School at Manunda, Cairns, enough. On my first visit there I was met with welcoming smiles from the friendly staff and yoga students. When I learned how affordable the fees schedule was and how frequently classes were run (7 days a week with multiple time slots) and that they were open to all skill levels, I signed up for a trial membership. It was the best thing I've ever done for myself.",
+    "I had no idea how transformative my classes would be. All of the instructors were supportive and genuinely interested in my individual needs and progress. It was only weeks later that I learned they are some of the most highly qualified in the country.",
+  ],
+  benefits: [
+    "Reduced stress and more energy",
+    "Improved sense of wellbeing",
+    "Greater poise, posture, and balance",
+    "Better skin tone and complexion, reduction of fine lines",
+    "Increased muscle strength and flexibility",
+    "Greater concentration and memory recall",
+    "More restful sleep, uninterrupted by digestion or other issues overnight",
+  ],
+  closing: [
+    "The list goes on, right down to my fingernails where fluting is less evident and they don't chip or split anymore.",
+    "As someone uncomfortable in groups and never a ‘joiner’, I found a place and sense of belonging in the community of TYS that I will always value.",
+  ],
+};
+
+export const testimonialChapters: TestimonialChapter[] = [
   {
-    name: "CeCelia Roupe",
-    role: "Student",
-    paragraphs: [
-      "I cannot recommend The Yoga School at Manunda, Cairns, enough. On my first visit there I was met with welcoming smiles from the friendly staff and yoga students. When I learned how affordable the fees schedule was and how frequently classes were run (7 days a week with multiple time slots) and that they were open to all skill levels, I signed up for a trial membership. It was the best thing I've ever done for myself.",
-      "I had no idea how transformative my classes would be. All of the instructors were supportive and genuinely interested in my individual needs and progress. It was only weeks later that I learned they are some of the most highly qualified in the country. Some benefits I have enjoyed include>",
-      "Reduced stress and more energy",
-      "Improved sense of wellbeing",
-      "Greater poise, posture, and balance",
-      "Better skin tone and complexion, reduction of fine lines",
-      "Increased muscle strength and flexibility",
-      "Greater concentration and memory recall",
-      "More restful sleep, uninterrupted by digestion or other issues overnight",
-      "The list goes on, right down to my fingernails where fluting is less evident and they don't chip or split anymore.",
-      "As someone uncomfortable in groups and never a ‘joiner’, I found a place and sense of belonging in the community of TYS that I will always value.",
+    id: "less-pain",
+    title: "Living with less pain",
+    intro: "An old spinal injury, arthritis, a sore neck, recovery from major surgery.",
+    image: {
+      src: "/images/gallery/DSC00115.jpg",
+      alt: "A student in a forward fold with head resting on the mat",
+      width: 1000,
+      height: 563,
+    },
+    stories: [
+      {
+        name: "Cleo Legge",
+        role: "Student",
+        paragraphs: [
+          "I rotated 6 vertebra in a snowboarding accident in 2002. Doing yoga a few times a week (the more, the better) helps me live without pain. If I miss a week or 2 of classes, the pain comes back.",
+        ],
+      },
+      {
+        name: "David Dobinson",
+        role: "Student",
+        paragraphs: [
+          "Practicing yoga for over 2 years has given me much improved flexibility in all joints and my arthritic pain has virtually disappeared. Improved breathing technique has also resulted in a calmer disposition.",
+        ],
+      },
+      {
+        name: "Erin",
+        role: "Student",
+        highlight: "It has also helped me on my journey of recovering from a major surgery.",
+        paragraphs: [
+          "Before coming to The Yoga school I thought I had been practicing yoga... little did I know that I had only just been touching the surface and my practice was about to transform entirely.",
+          "The Yoga School teachers have such a thorough, detailed understanding of the entire human body. Their verbal cueing on how to access each and every posture is exceptional and of a standard I have never experienced before.",
+          "Practicing at The Yoga School has helped me on an emotional level through an extremely challenging period of life. It has also helped me on my journey of recovering from a major surgery and the subsequent functional misalignments I have experienced in my body.",
+          "Thank you so much to each teacher at The Yoga School for offering such a wonderful space to learn, transform and feel at home. Cairns is very blessed to have such a great school.",
+        ],
+      },
+      {
+        name: "Judy Chapell",
+        role: "Private therapy session with Nicky Knoff for neck pain",
+        paragraphs: [
+          "Dear Nicky, Please accept my sincere gratitude and thanks. I feel honoured and nurtured to have been with you yesterday for the private session. I had the best nights sleep and am awake early ready to do my neck exercises.",
+        ],
+      },
     ],
   },
   {
-    name: "Cleo Legge",
-    role: "Student",
-    paragraphs: [
-      "I rotated 6 vertebra in a snowboarding accident in 2002.Doing yoga a few times a week (the more, the better) helps me live without pain. If I miss a week or 2 of classes, the pain comes back.",
+    id: "calmer-mind",
+    title: "A calmer mind",
+    intro: "Years of insomnia, a toxic workplace, a bleak stretch of life.",
+    image: {
+      src: "/images/gallery/DSC00200.jpg",
+      alt: "Students sitting cross-legged in meditation",
+      width: 1000,
+      height: 563,
+    },
+    stories: [
+      {
+        name: "Leon Gordon",
+        role: "Student for about 20 years",
+        highlight: "Now I look forward to 5:30 am when I can rise and shine and stretch.",
+        paragraphs: [
+          "I started Yoga classes during a bleak period in my life, about 20 years ago. While no magic fairy dust transformed me, my whole outlook is different now.",
+          "Insomnia used to be my plague, lying awake and beating myself up because I should be asleep and recharging my batteries but my mind wouldn’t shutdown. Yoga has taught me to do that. Now I look forward to 5:30 am when I can rise and shine and stretch for 30 to 40 minutes.",
+          "For me, it’s better than sleeping in and way better than insomnia… Yoga is a very welcome part of my life. Thanks to all Yoga teachers.",
+        ],
+      },
+      {
+        name: "Regular student",
+        role: "Name withheld",
+        paragraphs: [
+          "My friend introduced me to yoga; we both worked together in a very toxic work environment, which was damaging to my mind and soul. Yoga, and especially The Yoga School’s teaching style, has given me the confidence and the determination to set up my own business. Yoga will now be a huge part of my life.",
+        ],
+      },
+      {
+        name: "Judy Chappell",
+        role: "Long-term student at The Yoga School",
+        paragraphs: [
+          "Thank you for the Chakra Meditation which I have recently purchased. I have just given the time to listening and reading. What a clear simple helpful and informative presentation you have developed for us. It was a pleasure to watch listen and learn. I will find the technique most helpful I am sure.",
+        ],
+      },
     ],
   },
   {
-    name: "David Dobinson",
-    role: "Student",
-    paragraphs: [
-      "Practicing yoga for over 2 years has given me much improved flexibility in all joints and my arthritic pain has virtually disappeared. Improved breathing technique has also resulted in a calmer disposition.",
+    id: "breath",
+    title: "Breathing fully",
+    intro: "Lung capacity for a hill run, and breathing techniques for a birth.",
+    image: {
+      src: "/images/gallery/DSC00090edit.jpg",
+      alt: "Students standing with arms raised in prayer overhead",
+      width: 1000,
+      height: 714,
+    },
+    stories: [
+      {
+        name: "Adam Phillips",
+        role: "Teacher training graduate",
+        highlight: "I never knew how little of a lung capacity I had until now.",
+        paragraphs: [
+          "I regularly attempted to run up Earl Hill, but could not run all the way to the top, I could always only get around half way.",
+          "Long story short I damaged my MCL in my Right Knee and put me out of action, I could not run anymore.",
+          "I had my teacher training course with Knoff Yoga which is a 3 week intensive course.",
+          "Total time with my injury and teacher training time, meant I had not ran at all or attempted Earl Hill for 3 months.",
+          "After my teacher training I went back and ran up 3/4 of the way. Couple of days after I attempted it again and could run the whole of Earl Hill and have been ever since.",
+          "My lung capacity was not there before my teacher training course. Now my lungs are able to expand further to allow a full breath and supply my body with more oxygen. Allowing me to have enough fuel to reach the top of Earl Hill, running.",
+          "To go from never being able to run Earl Hill, then not running at all for 3 months and then suddenly being able to run all the way to the top, was 100% due to an increase in Lung Volume. The Yoga Postures and Pranayama (Breathing exercises) allowed the surrounding muscles of my Thoracic Cavity (rib cage area) to release and my lungs can expand further. This along with the strengthening of my Diaphragm.",
+          "I never knew how little of a lung capacity I had until now and it also continues to expand further. Every week I am noticing a little extra with my breathing. There are many more improvements in my overall health and wellbeing thanks to the Knoff Yoga System and the teachers.",
+        ],
+      },
+      {
+        name: "Tanya and Quinn",
+        role: "Yoga through pregnancy",
+        highlight: "I had a beautiful birth and I attribute a lot of this to Knoff yoga system and the breathing techniques I learnt at the school.",
+        paragraphs: [
+          "I want to say a very big thank you to Nicki, James and the entire Knoff Yoga teaching staff for supporting and nurturing me and my baby through my yoga practice during pregnancy. Your guidance allowed me to continue to practice yoga asana safely, with suitable adjustments and modifications right up to the day of my birth.",
+          "I felt so much support and kindness from the entire Knoff yoga community, including other students at the school. I had a beautiful birth and I attribute a lot of this to Knoff yoga system and the breathing techniques I learnt at the school. See you all back in class soon.",
+        ],
+      },
     ],
   },
   {
-    name: "Leon Gordon",
-    role: "Student",
-    paragraphs: [
-      "I started Yoga classes during a bleak period in my life, about 20 years ago. While no magic fairy dust transformed me, my whole outlook is different now.Insomnia used to be my plague, lying awake and",
-      "beating myself up because I should be asleep and recharging my batteries but my mind wouldn’t shutdown. Yoga has taught me to do that. Now I look forward to 5:30 am when I can rise and shine and stretch",
-      "for 30 to 40 minutes. For me, it’s better than sleeping in and way better than insomnia… Yoga is a very welcome part of my life. Thanks to all Yoga teachers.",
-    ],
-  },
-  {
-    name: "Regular student",
-    role: "name withheld",
-    paragraphs: [
-      "My friend introduced me to yoga; we both worked together in a very toxic work environment, which was damaging to my mind and soul. Yoga, and especially The Yoga School’s teaching style, has given me the confidence and the determination to set up my own business. Yoga will now be a huge part of my life.",
-    ],
-  },
-  {
-    name: "Tess Boes",
-    role: "Owner of Yoga Align Australia",
-    paragraphs: [
-      "Dearest Nicky. Working with you today was amazing , my sincerest gratitude for your mastery and your wisdom. I cant imagine where I would be today if I had not met you many years ago. You have also shown my children a way to live their lives, I could never thank you enough. Thank you for your kind words, they give me much inspiration. My love is always with you xxx.",
-    ],
-  },
-  {
-    name: "Tanya and Quinn",
-    role: "Student",
-    paragraphs: [
-      "I want to say a very big thank you to Nicki, James and the entire Knoff Yoga teaching staff for supporting and nurturing me and my baby through my yoga practice during pregnancy. Your guidance allowed me to continue to practice yoga asana safely, with suitable adjustments and modifications right up to the day of my birth. I felt so much support and kindness from the entire Knoff yoga community, including other students at the school. I had a beautiful birth and I attribute a lot of this to Knoff yoga system and the breathing techniques I learnt at the school.See you all back in class soon.",
-    ],
-  },
-  {
-    name: "Adam Phillips",
-    role: "Student",
-    paragraphs: [
-      "I regularly attempted to run up Earl Hill, but could not run all the way to the top, I could always only get around half way.",
-      "Long story short I damaged my MCL in my Right Knee and put me out of action, I could not run anymore.",
-      "I had my teacher training course with Knoff Yoga which is a 3 week intensive course.",
-      "Total time with my injury and teacher training time, meant I had not ran at all or attempted Earl Hill for 3 months.",
-      "After my teacher training I went back and ran up 3/4 of the way. Couple of days after I attempted it again and could run the whole of Earl Hill and have been ever since.",
-      "My lung capacity was not there before my teacher training course. Now my lungs are able to expand further to allow a full breath and supply my body with more oxygen. Allowing me to have enough fuel to reach the top of Earl Hill, running.",
-      "To go from never being able to run Earl Hill, then not running at all for 3 months and then suddenly being able to run all the way to the top, was 100% due to an increase in Lung Volume. The Yoga Postures and Pranayama (Breathing exercises) allowed the surrounding muscles of my Thoracic Cavity (rib cage area) to release and my lungs can expand further. This along with the strengthening of my Diaphragm.",
-      "I never knew how little of a lung capacity I had until now and it also continues to expand further. Every week I am noticing a little extra with my breathing. There are many more improvements in my overall health and wellbeing thanks to the Knoff Yoga System and the teachers.",
-    ],
-  },
-  {
-    name: "Judy Chappell",
-    role: "long term student at The Yoga School",
-    paragraphs: [
-      "Thank you for the Chakra Meditation which I have recently purchased. I have just given the time to listening and reading. What a clear simple helpful and informative presentation you have developed for us. It was a pleasure to watch listen and learn. I will find the technique most helpful I am sure.",
-    ],
-  },
-  {
-    name: "Erin",
-    role: "Student",
-    paragraphs: [
-      "Before coming to The Yoga school I thought I had been practicing yoga... little did I know that I had only just been touching the surface and my practice was about to transform entirely.",
-      "The Yoga School teachers have such a thorough, detailed understanding of the entire human body. Their verbal cueing on how to access each and every posture is exceptional and of a standard I have never experienced before.",
-      "Practicing at The Yoga School has helped me on an emotional level through an extremely challenging period of life. It has also helped me on my journey of recovering from a major surgery and the subsequent functional misalignments I have experienced in my body.",
-      "Thank you so much to each teacher at The Yoga School for offering such a wonderful space to learn, transform and feel at home. Cairns is very blessed to have such a great school.",
-    ],
-  },
-  {
-    name: "Judy Chapell",
-    role: "Private therapy session with Nicky Knoff for neck pain",
-    paragraphs: [
-      "Dear Nicky, Please accept my sincere gratitude and thanks. I feel honoured and nurtured to have been with you yesterday for the private session. I had the best nights sleep and am awake early ready to do my neck exercises.",
-    ],
-  },
-  {
-    name: "Tomoko Gregory",
-    role: "Knoff Yoga System Teacher",
-    paragraphs: [
-      "Dear Nicky, I see you often but every time when I see you I don't have time to talk to you. I decided to write Email instead.",
-      "I had 3 new students in my class the other day. They have been doing yoga for about 10 years. As soon as they were on the mat I realised that they didn't know the foundation and any other principles of practice. They have their own habits. After that class I was just thinking about yoga generally. All physical habits come from the habits of our mind which is our ego.",
-      "The way you have been teaching us by using the principle of practice leads us to change our old physical incorrect habits. That changes our mental habits and we become free from ego.",
-      "Both our body and mind are balanced and have harmony. We feel comfortable physically and mentally. Comfort makes us happy. This is what the difference between yoga and other physical exercise too.",
-      "That reminds me that teaching and doing the principle of practice is very simple but very powerful.",
-      "There is a possibility that I could have been stuck with my old habits if I went to other yoga school. I can't appreciate enough that you are my teacher. I am so lucky.",
-    ],
-  },
-  {
-    name: "Kristin Nelson",
-    role: "Fleurieu Yoga",
-    paragraphs: [
-      "Hello,",
-      "I just wanted to say I LOVED JAMES workshop in Adelaide a few weekends back- I got SO much out of it- thank you!!",
-      "I've been teaching for ten years now and I feel like you just perfectly articulated everything I'm trying to put out there, so thank you for your skill and clarity in sharing.",
-      "I would LOVE a copy of your closing words/ prayers you use if you are open to sharing? Your words resonated beautifully.",
-      "Many Thanks :).",
+    id: "teachers",
+    title: "Letters from teachers",
+    intro: "Yoga teachers writing to Nicky and James Knoff.",
+    image: {
+      src: "/images/gallery/DSC00019edit.jpg",
+      alt: "A teacher giving a student a hands-on adjustment",
+      width: 1000,
+      height: 563,
+    },
+    stories: [
+      {
+        name: "Tess Boes",
+        role: "Owner of Yoga Align Australia",
+        paragraphs: [
+          "Dearest Nicky. Working with you today was amazing, my sincerest gratitude for your mastery and your wisdom. I can't imagine where I would be today if I had not met you many years ago. You have also shown my children a way to live their lives, I could never thank you enough. Thank you for your kind words, they give me much inspiration. My love is always with you xxx.",
+        ],
+      },
+      {
+        name: "Tomoko Gregory",
+        role: "Knoff Yoga System Teacher",
+        highlight: "Teaching and doing the principle of practice is very simple but very powerful.",
+        paragraphs: [
+          "Dear Nicky, I see you often but every time when I see you I don't have time to talk to you. I decided to write Email instead.",
+          "I had 3 new students in my class the other day. They have been doing yoga for about 10 years. As soon as they were on the mat I realised that they didn't know the foundation and any other principles of practice. They have their own habits. After that class I was just thinking about yoga generally. All physical habits come from the habits of our mind which is our ego.",
+          "The way you have been teaching us by using the principle of practice leads us to change our old physical incorrect habits. That changes our mental habits and we become free from ego.",
+          "Both our body and mind are balanced and have harmony. We feel comfortable physically and mentally. Comfort makes us happy. This is what the difference between yoga and other physical exercise too.",
+          "That reminds me that teaching and doing the principle of practice is very simple but very powerful.",
+          "There is a possibility that I could have been stuck with my old habits if I went to other yoga school. I can't appreciate enough that you are my teacher. I am so lucky.",
+        ],
+      },
+      {
+        name: "Kristin Nelson",
+        role: "Fleurieu Yoga",
+        highlight: "I feel like you just perfectly articulated everything I’m trying to put out there.",
+        paragraphs: [
+          "Hello,",
+          "I just wanted to say I LOVED JAMES workshop in Adelaide a few weekends back- I got SO much out of it- thank you!!",
+          "I've been teaching for ten years now and I feel like you just perfectly articulated everything I'm trying to put out there, so thank you for your skill and clarity in sharing.",
+          "I would LOVE a copy of your closing words/ prayers you use if you are open to sharing? Your words resonated beautifully.",
+          "Many Thanks :).",
+        ],
+      },
     ],
   },
 ];
@@ -1087,10 +1156,12 @@ export const passes: PassGroup[] = [
       {
         name: "Adult",
         price: "$35",
+        url: "https://momence.com/The-Yoga-School/membership/1-Class-Pass/54228",
       },
       {
         name: "Child (aged 6–12)",
         price: "$14",
+        url: "https://momence.com/The-Yoga-School/membership/Child---1-Class-Pass./54244",
       },
     ],
     note: null,
@@ -1101,10 +1172,12 @@ export const passes: PassGroup[] = [
       {
         name: "1 class",
         price: "$20",
+        url: "https://momence.com/The-Yoga-School/membership/Chair-Yoga---1-Class-Pass/54227",
       },
       {
         name: "5 classes",
         price: "$100",
+        url: "https://momence.com/The-Yoga-School/membership/Chair-Yoga---5-Class-Pass/54242",
       },
     ],
     note: null,
@@ -1115,10 +1188,12 @@ export const passes: PassGroup[] = [
       {
         name: "5 classes",
         price: "$120",
+        url: "https://momence.com/The-Yoga-School/membership/5-Class-Pass/54230",
       },
       {
         name: "20 classes",
         price: "$360",
+        url: "https://momence.com/The-Yoga-School/membership/20-Class-Pass/54232",
       },
     ],
     note: "5-class valid 6 months, 20-class valid 12 months from first use. Expiry dates can’t be extended.",
@@ -1129,10 +1204,12 @@ export const passes: PassGroup[] = [
       {
         name: "180 days (max 3-week hold)",
         price: "$1,045",
+        url: "https://momence.com/The-Yoga-School/membership/6-Months-up-front-(180-days)/54239",
       },
       {
         name: "365 days (max 6-week hold)",
         price: "$1,969",
+        url: "https://momence.com/The-Yoga-School/membership/12-Months-up-front-(365-days)/54240",
       },
     ],
     note: "Includes all Yoga and Shoshin classes, 10% off retail, $10 child’s passes and 1 complimentary pass per month for a friend or family member.",

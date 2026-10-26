@@ -6,8 +6,9 @@ import { TileIcon } from "./Icons";
 
 const isExternal = (href: string) => /^https?:/.test(href);
 
-/** Desktop menu dropdown ("Shop", "More"): opens on hover or click, closes on Esc, outside click, focus leaving or page change.
-    Links to other sites (Momence) open in a new tab. */
+/** Desktop menu dropdown ("About", "Shop", "More"): opens on hover or click, closes on Esc, outside click, focus leaving
+    or page change. With href, the label is itself a link (About page, Momence shop) and the list opens on hover or
+    keyboard focus. Links to other sites (Momence) open in a new tab. */
 export function NavDrop({
   id,
   label,
@@ -15,6 +16,8 @@ export function NavDrop({
   pathname,
   active,
   isCurrent,
+  className,
+  href,
 }: {
   id: string;
   label: string;
@@ -22,10 +25,12 @@ export function NavDrop({
   pathname: string;
   active: boolean;
   isCurrent: (href: string) => boolean;
+  className?: string;
+  href?: string;
 }) {
   const [open, setOpen] = useState(false);
   const wrap = useRef<HTMLLIElement>(null);
-  const btn = useRef<HTMLButtonElement>(null);
+  const btn = useRef<HTMLElement | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => setOpen(false), [pathname]);
@@ -39,9 +44,23 @@ export function NavDrop({
     return () => document.removeEventListener("click", onDoc);
   }, [open]);
 
+  const trigger = {
+    ref: (el: HTMLElement | null) => {
+      btn.current = el;
+    },
+    className: `drop-btn${active ? " is-active" : ""}`,
+    "aria-expanded": open,
+    "aria-controls": id,
+  };
+  const chevron = (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+    </svg>
+  );
+
   return (
     <li
-      className="has-drop"
+      className={`has-drop${className ? " " + className : ""}`}
       ref={wrap}
       onMouseEnter={() => {
         if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -60,22 +79,27 @@ export function NavDrop({
         if (!wrap.current?.contains(e.relatedTarget as Node)) setOpen(false);
       }}
     >
-      <button
-        ref={btn}
-        type="button"
-        className={`drop-btn${active ? " is-active" : ""}`}
-        aria-expanded={open}
-        aria-controls={id}
-        onClick={(e) => {
-          e.stopPropagation();
-          setOpen((o) => !o);
-        }}
-      >
-        {label}{" "}
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
-        </svg>
-      </button>
+      {!href ? (
+        <button
+          {...trigger}
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpen((o) => !o);
+          }}
+        >
+          {label} {chevron}
+        </button>
+      ) : isExternal(href) ? (
+        <a {...trigger} href={href} target="_blank" rel="noopener" onFocus={() => setOpen(true)}>
+          {label} {chevron}
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      ) : (
+        <Link {...trigger} href={href} aria-current={isCurrent(href) ? "page" : undefined} onFocus={() => setOpen(true)}>
+          {label} {chevron}
+        </Link>
+      )}
       <div className={`drop${open ? " is-open" : ""}`} id={id}>
         {items.map((n) => {
           const body = (

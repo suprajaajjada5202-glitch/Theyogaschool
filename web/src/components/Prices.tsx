@@ -35,7 +35,7 @@ export function MembershipCards({ plans }: { plans: Membership[] }) {
 }
 
 /** Text with the studio phone number turned into a call link. */
-function withPhone(text: string) {
+export function withPhone(text: string) {
   const parts = text.split("0412 499 700");
   return parts.map((p, i) => (
     <span key={i}>
@@ -53,9 +53,10 @@ const PASS_ICONS: [RegExp, string][] = [
   [/private/i, "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-8 9a8 8 0 0 1 16 0"],
 ];
 const PASS_ICON_DEFAULT = "M12 3 2 8l10 5 10-5-10-5ZM2 12.5l10 5 10-5M2 17l10 5 10-5";
+export const passIcon = (title: string) => PASS_ICONS.find(([re]) => re.test(title))?.[1] ?? PASS_ICON_DEFAULT;
 
 /** "180 days (max 3-week hold)" or "1 person: 60 / 90 min" → main label + detail line. */
-function splitName(name: string): [string, string | null] {
+export function splitName(name: string): [string, string | null] {
   const m = name.match(/^(.+?)(?::\s+(.+)|\s+\((.+)\))$/);
   return m ? [m[1], m[2] ?? m[3]] : [name, null];
 }
@@ -75,7 +76,7 @@ export function PassesList({ groups, children }: { groups: PassGroup[]; children
               delay={n % 3 || undefined}
             >
               <header className="pass-card__head">
-                <TileIcon className="pass-card__ic" d={PASS_ICONS.find(([re]) => re.test(g.title))?.[1] ?? PASS_ICON_DEFAULT} />
+                <TileIcon className="pass-card__ic" d={passIcon(g.title)} />
                 <h3>{g.title}</h3>
               </header>
               <ul className="pass-card__list">
@@ -88,6 +89,14 @@ export function PassesList({ groups, children }: { groups: PassGroup[]; children
                         {detail && <small>{detail}</small>}
                       </span>
                       <span className="pass-card__price">{i.price}</span>
+                      {i.url && (
+                        <a className="pass-card__buy" href={i.url} target="_blank" rel="noopener">
+                          Buy<span className="sr-only">
+                            {" "}
+                            {g.title}: {i.name} (opens Momence in a new tab)
+                          </span>
+                        </a>
+                      )}
                     </li>
                   );
                 })}

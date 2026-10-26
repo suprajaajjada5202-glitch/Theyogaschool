@@ -71,7 +71,7 @@ export default function AboutPage() {
                   <use href="#i-check" />
                 </svg>
               </span>
-              Our Master Teachers
+              Master Teachers, Nicky Knoff and James Bryan
             </p>{" "}
           </Reveal>{" "}
         </div>{" "}
@@ -144,7 +144,7 @@ export default function AboutPage() {
           {" "}
           <Reveal>
             {" "}
-            <p className="eyebrow">Knoff Yoga</p>{" "}
+            <p className="eyebrow">Knoff Yoga definition</p>{" "}
             <h2 id="knoff-title">
               The body and mind are <em>two sides of the same coin</em>
             </h2>{" "}
@@ -164,9 +164,6 @@ export default function AboutPage() {
                 more energy—and all from a centre of emotional balance.
               </p>
             </div>{" "}
-            <blockquote className="pull">
-              Life has provided you with a vehicle. Knoff Yoga is the owner’s manual.<cite>The Knoff Yoga philosophy</cite>
-            </blockquote>{" "}
           </Reveal>{" "}
           <Reveal delay={1}>
             {" "}
@@ -186,6 +183,9 @@ export default function AboutPage() {
                 changes in the direction you choose.
               </p>
             </div>{" "}
+            <blockquote className="pull">
+              Life has provided you with a vehicle. Knoff Yoga is the owner’s manual.<cite>The Knoff Yoga philosophy</cite>
+            </blockquote>{" "}
             <div className="arch" style={{ marginTop: "var(--s-5)" }}>
               {" "}
               <div className="arch__frame">
@@ -262,12 +262,17 @@ export default function AboutPage() {
                 <span>Free parking at Piccones Shopping Village, some undercover.</span>
               </li>{" "}
             </ul>{" "}
-            <Link className="btn btn--primary" href="/pages/contact-us">
-              Visit the studio{" "}
-              <svg aria-hidden="true">
-                <use href="#i-arrow" />
-              </svg>
-            </Link>{" "}
+            <div className="row-actions" style={{ justifyContent: "flex-start" }}>
+              <Link className="btn btn--primary" href="/pages/contact-us">
+                Visit the studio{" "}
+                <svg aria-hidden="true">
+                  <use href="#i-arrow" />
+                </svg>
+              </Link>
+              <Link className="btn btn--outline" href="/pages/teacher-training">
+                Learn about our Teacher Training courses
+              </Link>
+            </div>{" "}
           </Reveal>{" "}
         </div>{" "}
       </section>{" "}

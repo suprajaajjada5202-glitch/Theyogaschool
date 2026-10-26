@@ -4,6 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { seo } from "@/lib/seo";
+import { MAP_EMBED } from "@/lib/site";
 
 export default function ContactPage() {
   return (
@@ -160,7 +161,7 @@ export default function ContactPage() {
                 {" "}
                 <iframe
                   title="Map showing The Yoga School at Piccones Village, Edge Hill, Cairns"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d954.6893892806809!2d145.7398414291665!3d-16.91193361616657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x697864372f355dc9:0xb1f69afbf68bcaa2!2sThe+Yoga+School!5e0!3m2!1sen!2sau!4v1534855194268"
+                  src={MAP_EMBED}
                   width="600"
                   height="300"
                   loading="lazy"

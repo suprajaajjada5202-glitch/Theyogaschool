@@ -36,16 +36,17 @@ export function ClassRows({ classes }: { classes: ClassItem[] }) {
           <div>
             <p className="row__sub">{c.level}</p>
             <h2>{c.name}</h2>
-            <p className="row__spec">{c.summary}</p>
             <div className="card__meta">
               <span className="chip">
                 <Use id="i-level" />
                 {c.level}
               </span>{" "}
-              <span className="chip">
-                <Use id="i-clock" />
-                {c.duration ?? <span className="ph">[Duration]</span>}
-              </span>
+              {c.duration && (
+                <span className="chip">
+                  <Use id="i-clock" />
+                  {c.duration}
+                </span>
+              )}
             </div>
             <div className="prose">
               {c.description.map((p, i) => (
@@ -77,6 +78,53 @@ export function ClassRows({ classes }: { classes: ClassItem[] }) {
         </Reveal>
       ))}
     </div>
+  );
+}
+
+/** Class cards for the home page slider: same list as /pages/classes, each linking to its section there. */
+export function ClassCards({ classes }: { classes: ClassItem[] }) {
+  return (
+    <>
+      {classes.map((c) => (
+        <li className="slide" key={c.slug}>
+          <article className="card">
+            <div className="card__media">
+              {c.image && (
+                <img
+                  decoding="async"
+                  src={c.image.src}
+                  alt={c.image.alt}
+                  width={c.image.width}
+                  height={c.image.height}
+                  loading="lazy"
+                />
+              )}
+              {c.tag && <span className="card__tag">{c.tag}</span>}
+            </div>
+            <div className="card__body">
+              <h3>{c.name}</h3>
+              <p>{c.summary}</p>
+              <div className="card__meta">
+                <span className="chip">
+                  <Use id="i-level" />
+                  {c.level}
+                </span>{" "}
+                {c.duration && (
+                  <span className="chip">
+                    <Use id="i-clock" />
+                    {c.duration}
+                  </span>
+                )}
+              </div>
+              <Link className="link-arrow" href={`/pages/classes#class-${c.slug}`}>
+                Class details <Use id="i-arrow" />
+                <span className="sr-only">: {c.name}</span>
+              </Link>
+            </div>
+          </article>
+        </li>
+      ))}
+    </>
   );
 }
 

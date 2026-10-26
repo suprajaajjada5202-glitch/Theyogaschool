@@ -2,6 +2,9 @@ export const SITE_URL = "https://theyogaschool.com.au";
 export const LOGO =
   "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png";
 export const OFFER_URL = "https://momence.com/The-Yoga-School/membership/30-days-$99-NS-intro-offer-special!/113989";
+/** Google Maps embed of the studio (Contact page, home page "Locate us") */
+export const MAP_EMBED =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d954.6893892806809!2d145.7398414291665!3d-16.91193361616657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x697864372f355dc9:0xb1f69afbf68bcaa2!2sThe+Yoga+School!5e0!3m2!1sen!2sau!4v1534855194268";
 
 export type NavItem = { href: string; label: string; sub: string; icon: string };
 
@@ -30,35 +33,50 @@ export const MOMENCE_VIDEOS = "https://momence.com/video/plugin/23652";
 
 const N = (href: string, label: string, sub: string, icon: string): NavItem => ({ href, label, sub, icon });
 
-/** Desktop bar (in order) */
-export const PRIMARY: NavItem[] = [
-  N("/pages/home", "Home", "Welcome", I.home),
-  N("/pages/about", "About", "Our story", I.about),
-  N("/pages/classes", "Classes", "Levels 1–4 & more", I.classes),
+/** A desktop bar entry; one with children also opens a dropdown (on hover or keyboard focus) */
+export type NavEntry = NavItem & { children?: NavItem[] };
+
+/** "About" dropdown (as on the old site: Teachers and Gallery sit under About; "About" itself opens the About page) */
+export const ABOUT: NavItem[] = [
   N("/pages/teachers", "Teachers", "Meet the team", I.teachers),
-  N("/pages/teacher-training", "Training", "With the Masters", I.training),
-  N("/pages/timetable", "Schedule", "Live timetable", I.schedule),
-  N("/pages/prices", "Pricing", "Passes & memberships", I.prices),
-  N("/pages/contact-us", "Contact", "Visit or call us", I.contact),
+  N("/pages/photo-gallery", "Gallery", "Inside the studio", I.gallery),
 ];
 
-/** "Shop" dropdown (same three links as the old site's Shop menu). Links starting with http open Momence in a new tab. */
+/** "Shop" dropdown (same three links as the old site's Shop menu; "Shop" itself opens the Momence shop).
+    Links starting with http open Momence in a new tab. */
 export const SHOP: NavItem[] = [
-  N("/pages/prices", "Class passes", "Passes & memberships", I.ticket),
+  N("/pages/prices#passes", "Class passes", "Drop-ins, class packs & unlimited", I.ticket),
   N(MOMENCE_SHOP, "Props & equipment", "Mats, blocks, books · online shop", I.shop),
   N(MOMENCE_VIDEOS, "On-demand videos", "Practise at home", I.video),
 ];
 
-/** "More" dropdown */
-export const MORE: NavItem[] = [
-  N("/pages/photo-gallery", "Gallery", "Inside the studio", I.gallery),
+/** Desktop bar, in the old site's menu order. Entries that don't fit the bar move into "More" (components/Header.tsx). */
+export const NAV: NavEntry[] = [
+  N("/pages/home", "Home", "Welcome", I.home),
+  N("/pages/classes", "Classes", "Levels 1–4 & more", I.classes),
+  N("/pages/timetable", "Timetable", "Live timetable", I.schedule),
+  N("/pages/prices", "Prices", "Passes & memberships", I.prices),
+  { ...N("/pages/about", "About", "Our story", I.about), children: ABOUT },
+  { ...N(MOMENCE_SHOP, "Shop", "Mats, blocks, books · online shop", I.shop), children: SHOP },
   N("/pages/events", "Events", "Workshops & specials", I.events),
-  N("/pages/testimonials", "Testimonials", "Student stories", I.testimonials),
   N("/pages/blog1", "Blog", "Reflections on practice", I.blog),
+  N("/pages/teacher-training", "Teacher Training", "With the Masters", I.training),
+  N("/pages/testimonials", "Testimonials", "Student stories", I.testimonials),
+  N("/pages/contact-us", "Contact", "Visit or call us", I.contact),
+];
+
+/** Always in "More": pages the old menu didn't list */
+export const MORE: NavItem[] = [
   N("/pages/faqs", "FAQs", "Good to know", I.faqs),
   N("/workplace-wellbeing", "Workplace", "Team wellbeing", I.workplace),
   N("/gift-vouchers", "Gift vouchers", "Give the gift of yoga", I.gift),
 ];
 
-/** Mobile menu tiles: everything, in a sensible order */
-export const TILES: NavItem[] = [...PRIMARY.slice(0, 7), ...MORE.slice(0, 6), PRIMARY[7], SHOP[1], SHOP[2], MORE[6]];
+/** Bar entries as plain links (a dropdown is its own link, then its items), each page once. */
+export function flatNav(entries: NavEntry[]): NavItem[] {
+  const seen = new Set<string>();
+  return entries.flatMap((n) => [n, ...(n.children ?? [])]).filter((n) => !seen.has(n.href) && seen.add(n.href));
+}
+
+/** Mobile menu tiles: everything, in menu order */
+export const TILES: NavItem[] = flatNav([...NAV, ...MORE]);

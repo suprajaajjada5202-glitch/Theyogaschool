@@ -25,6 +25,34 @@ const tidy = (s: string | null | undefined) =>
     .replace(/[.\s]+$/, "")
     .trim();
 
+/** Momence keeps an event's write-up in the session's "level" field. Its opening paragraph is the summary the
+    old site showed (without a first line that only repeats the event name); the full text is on Momence. */
+export function momenceSummary(name: string, text: string | null | undefined) {
+  const key = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const body = (text ?? "").trim();
+  const nl = body.indexOf("\n");
+  const rest = nl > 0 && key(body.slice(0, nl)) === key(name) ? body.slice(nl + 1) : body;
+  return rest.trim().split(/\n\s*\n/)[0].trim();
+}
+
+/** Momence session id from an event link (momence.com/s/143061284 or momence.com/The-Yoga-School/Name/143061284). */
+export function momenceSessionId(url: string | null | undefined) {
+  const m = /^https:\/\/momence\.com\/(?:s|The-Yoga-School\/[^/?#]+)\/(\d+)\/?(?:[?#]|$)/.exec(url ?? "");
+  return m ? Number(m[1]) : null;
+}
+
+/** Summary of one Momence event (see momenceSummary); "" if it has none (refreshed hourly). */
+export async function getMomenceEventSummary(sessionId: number): Promise<string> {
+  try {
+    const res = await fetch(`https://momence.com/_api/primary/plugin/sessions/${sessionId}`, { next: { revalidate: 3600 } });
+    if (!res.ok) return "";
+    const s = ((await res.json()) as { message?: { hostId: number; sessionName: string; level: string | null } }).message;
+    return s?.hostId === HOST_ID ? momenceSummary(s.sessionName, s.level) : "";
+  } catch {
+    return "";
+  }
+}
+
 type MomenceSession = {
   id: number;
   sessionName: string;
@@ -113,6 +141,7 @@ export type MomenceSlot = {
   price: number | null;
   free: boolean;
   image: string | null;
+  description: string;
   link: string;
   cancelled: boolean;
 };
@@ -138,7 +167,13 @@ export async function getMomenceSessions(days: number): Promise<MomenceSlot[]> {
       const list =
         (
           (await res.json()) as {
-            payload?: (MomenceSession & { type: string; endsAt: string; freeEvent: boolean; image: string | null })[];
+            payload?: (MomenceSession & {
+              type: string;
+              endsAt: string;
+              freeEvent: boolean;
+              image: string | null;
+              level: string | null;
+            })[];
           }
         ).payload ?? [];
       out.push(
@@ -151,6 +186,7 @@ export async function getMomenceSessions(days: number): Promise<MomenceSlot[]> {
           price: s.fixedTicketPrice,
           free: Boolean(s.freeEvent),
           image: s.image,
+          description: momenceSummary(s.sessionName, s.level),
           link: s.link,
           cancelled: s.isCancelled,
         })),

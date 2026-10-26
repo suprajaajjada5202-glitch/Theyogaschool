@@ -28,7 +28,10 @@ export type Post = {
 
 export type Video = { id: string; title: string; duration: string };
 export type ShortTestimonial = { quote: string; name: string; role: string };
-export type Testimonial = { name: string; role: string; paragraphs: string[] };
+/** highlight: a line from the story, set large above it (short stories without one are shown whole) */
+export type Testimonial = { name: string; role: string; paragraphs: string[]; highlight?: string };
+export type TestimonialChapter = { id: string; title: string; intro: string; image: Img; stories: Testimonial[] };
+export type FeaturedTestimonial = Testimonial & { highlight: string; benefits: string[]; closing: string[] };
 
 export type Membership = {
   name: string;
@@ -42,7 +45,8 @@ export type Membership = {
   ctaLabel: string;
   ctaUrl: string;
 };
-export type PassGroup = { title: string; items: { name: string; price: string }[]; note: string | null };
+/** A pass item's url is its Momence checkout page (shown as a Buy button). */
+export type PassGroup = { title: string; items: { name: string; price: string; url?: string | null }[]; note: string | null };
 
 export type Product = {
   name: string;

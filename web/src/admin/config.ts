@@ -32,6 +32,8 @@ export type ContentType = {
   page: string;
   /** Field shown as a small photo in the list */
   thumb?: string;
+  /** Show "Import missing …": adds the website's built-in items that aren't here yet (see ADD_MISSING in the import route) */
+  addMissing?: boolean;
   single: string;
   intro: string;
   order: [string, boolean][];
@@ -90,32 +92,37 @@ export const TYPES: Record<string, ContentType> = {
   classes: {
     page: "/pages/classes",
     thumb: "image_url",
+    addMissing: true,
     title: "Classes",
     single: "class",
     order: [["sort", true]],
     search: ["name", "level"],
-    intro: "Classes on the Classes page. Lower “Sort” numbers appear first.",
+    intro: "Classes on the Classes page and the home page slider. Lower “Order” numbers appear first.",
     cols: [
       ["Name", (r) => String(r.name ?? "")],
-      ["Level", (r) => String(r.level ?? "")],
+      ["Who it's for", (r) => String(r.level ?? "")],
       ["Duration", (r) => String(r.duration || "—")],
       ["Status", status],
     ],
     fields: [
-      F("name", "Class name", "text", { required: true, half: true }),
+      F("name", "Class name", "text", { required: true }),
+      F("level", "Who it's for", "text", { half: true, help: "e.g. Beginners or All levels" }),
+      F("duration", "Duration", "text", { half: true, help: "e.g. 60–75 min. Leave empty to hide." }),
+      F("description", "Description", "textarea", {
+        big: true,
+        help: "Leave a blank line between paragraphs. The first sentence also appears on the home page class cards.",
+      }),
+      F("image_url", "Photo", "image"),
+      F("tag", "Photo label", "text", {
+        half: true,
+        help: "Optional short tag shown on the class photo, e.g. Start here or New. Leave empty for none.",
+      }),
+      F("sort", "Order", "number", { half: true, def: 0, help: "Lower numbers appear first." }),
       F("slug", "Web address name", "text", {
         required: true,
-        half: true,
         slugFrom: "name",
-        help: "Used in links, e.g. /pages/classes#class-yin. Lowercase, no spaces.",
+        help: "Filled in from the class name. Used in links, e.g. /pages/classes#class-yin.",
       }),
-      F("level", "Level", "text", { half: true }),
-      F("duration", "Duration", "text", { half: true, help: "e.g. 60–75 min. Leave empty to hide." }),
-      F("summary", "Short description", "text"),
-      F("description", "Full description", "textarea", { big: true, help: "Leave a blank line between paragraphs." }),
-      F("tag", "Badge", "text", { half: true, help: "Optional, e.g. Start here" }),
-      F("sort", "Sort", "number", { half: true, def: 0 }),
-      F("image_url", "Photo", "image"),
       PUBLISHED,
     ],
   },
@@ -205,7 +212,9 @@ export const TYPES: Record<string, ContentType> = {
       F("teacher", "Teacher", "text", { half: true }),
       F("price_label", "Price", "text", { half: true, help: "e.g. $45 or Free" }),
       F("location", "Location", "text", { def: "The Yoga School, Piccones Village, Edge Hill" }),
-      F("description", "Description", "textarea", { help: "Blank line = new paragraph." }),
+      F("description", "Description", "textarea", {
+        help: "Blank line = new paragraph. Leave empty to show the event's summary from Momence.",
+      }),
       F("book_url", "Booking link", "url"),
       F("image_url", "Image", "image"),
       PUBLISHED,

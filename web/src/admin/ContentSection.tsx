@@ -65,10 +65,10 @@ export function ContentSection({ table }: { table: string }) {
     toast(published ? "Now live on the website" : "Hidden from the website");
   }
 
-  async function runImport() {
+  async function runImport(missing = false) {
     setImporting(true);
     try {
-      const { results } = await importContent([table]);
+      const { results } = await importContent([table], missing);
       const r = results[0];
       toast(r?.status === "imported" ? `Imported ${r.count} items` : (r?.message ?? "Nothing imported"));
       load();
@@ -99,6 +99,17 @@ export function ContentSection({ table }: { table: string }) {
           <a className="btn btn--outline btn--sm" href={type.page} target="_blank" rel="noopener">
             View page ↗
           </a>
+          {type.addMissing && !!rows?.length && (
+            <button
+              className="btn btn--outline btn--sm"
+              type="button"
+              disabled={importing}
+              onClick={() => runImport(true)}
+              title={`Adds the website's built-in ${type.title.toLowerCase()} that aren't here yet. Existing ones are never changed.`}
+            >
+              {importing ? "Importing…" : `Import missing ${type.title.toLowerCase()}`}
+            </button>
+          )}
           <button className="btn btn--primary btn--sm" type="button" onClick={() => setEditing({ row: null, isNew: true })}>
             + Add {type.single}
           </button>
@@ -140,7 +151,7 @@ export function ContentSection({ table }: { table: string }) {
             <h2>No {type.title.toLowerCase()} in Supabase yet</h2>
             <p>The website is showing its built-in content. Import it to edit it here, or add your own.</p>
             <div className="a-empty__actions">
-              <button className="btn btn--primary btn--sm" type="button" disabled={importing} onClick={runImport}>
+              <button className="btn btn--primary btn--sm" type="button" disabled={importing} onClick={() => runImport()}>
                 {importing ? "Importing…" : "Import from the website"}
               </button>
               <button className="btn btn--outline btn--sm" type="button" onClick={() => setEditing({ row: null, isNew: true })}>
