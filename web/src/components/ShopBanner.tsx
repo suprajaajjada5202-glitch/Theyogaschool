@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { MOMENCE_SHOP_URL } from "@/lib/momence";
 import type { Product } from "@/lib/types";
 import { Use } from "./Icons";
 import { Reveal } from "./Reveal";
@@ -7,7 +7,8 @@ import { SliderNav, SliderTrack } from "./Slider";
 /** Props first: these are what most students come back for. */
 const PRIORITY = /mat|block|bolster|stool|cushion|belt|strap|eye pillow|roller|sandbag|barrel|neti/i;
 
-/** "Shop the studio" banner: real products (with photos) from the studio's shop, auto-scrolling. */
+/** "Shop the studio" banner: real products (with photos) from the studio's shop, auto-scrolling. The button and
+    every product open the Momence shop in a new tab. */
 export function ShopBanner({ products }: { products: Product[] }) {
   const withPhotos = products.filter((p) => p.image);
   const picks = [...withPhotos.filter((p) => PRIORITY.test(p.name)), ...withPhotos.filter((p) => !PRIORITY.test(p.name))].slice(
@@ -27,16 +28,16 @@ export function ShopBanner({ products }: { products: Product[] }) {
             <p className="lead">Mats, blocks, bolsters, meditation stools, books and more. Members get 10% off retail.</p>
           </div>
           <SliderNav target="shop-track" prevLabel="Previous products" nextLabel="Next products" pauseLabel="Pause products">
-            <Link className="btn btn--teal btn--sm" href="/pages/shop">
+            <a className="btn btn--teal btn--sm" href={MOMENCE_SHOP_URL} target="_blank" rel="noopener">
               Browse the shop <Use id="i-arrow" />
-            </Link>
+            </a>
           </SliderNav>
         </Reveal>
         <Reveal className="slider slider--4">
           <SliderTrack id="shop-track" label="Products, scroll horizontally" auto={3500}>
             {picks.map((p) => (
               <li className="slide" key={p.name}>
-                <Link className="shop-card" href="/pages/shop">
+                <a className="shop-card" href={MOMENCE_SHOP_URL} target="_blank" rel="noopener">
                   <span className="shop-card__media">
                     <img
                       src={p.image!.src}
@@ -49,7 +50,7 @@ export function ShopBanner({ products }: { products: Product[] }) {
                   </span>
                   <span className="shop-card__name">{p.name}</span>
                   <span className="shop-card__price">{p.priceLabel}</span>
-                </Link>
+                </a>
               </li>
             ))}
           </SliderTrack>

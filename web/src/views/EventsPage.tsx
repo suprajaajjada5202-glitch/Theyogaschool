@@ -1,5 +1,4 @@
 /* Converted from the static page; interactive parts are React components. */
-import { MomenceWidget } from "@/components/MomenceWidget";
 import { Reveal } from "@/components/Reveal";
 import { UpcomingEvents } from "@/components/UpcomingEvents";
 import Link from "next/link";
@@ -43,8 +42,8 @@ export default async function EventsPage() {
               Go <em>deeper</em>
             </h1>{" "}
             <p className="lead">
-              Workshops, special classes and events at The Yoga School. Open the Workshops tab below to see everything coming up,
-              and book online.
+              Workshops, special classes and events at The Yoga School. See what&rsquo;s coming up below, and book your place
+              online.
             </p>{" "}
           </Reveal>{" "}
           <Reveal delay={1} className="arch">
@@ -74,17 +73,6 @@ export default async function EventsPage() {
         <div className="container">
           {" "}
           <UpcomingEvents events={events} />{" "}
-          <Reveal className="schedule" id="book" tabIndex={0} role="region" aria-label="Live events and workshops, scrollable">
-            {" "}
-            <MomenceWidget />{" "}
-            <noscript>
-              <p>The live events list needs JavaScript. Please call 0412 499 700.</p>
-            </noscript>{" "}
-          </Reveal>{" "}
-          <Reveal as="p" className="schedule__help">
-            Tip: switch between <strong>Classes</strong> and <strong>Workshops</strong> at the top of the timetable. Questions?
-            Call <a href="tel:+61412499700">0412 499 700</a>.
-          </Reveal>{" "}
         </div>{" "}
       </section>{" "}
       <section className="section cta-band" aria-labelledby="cta-title">

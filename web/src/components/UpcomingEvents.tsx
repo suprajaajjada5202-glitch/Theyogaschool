@@ -18,12 +18,16 @@ const linkify = (text: string) =>
     ),
   );
 
-/** Upcoming events from Supabase. Nothing is shown when there are none (the Momence widget below still lists workshops). */
+/** Upcoming events from Supabase, with a short note when there are none. */
 export function UpcomingEvents({ events }: { events: EventItem[] }) {
-  if (!events.length) return null;
   return (
     <div className="events">
       <h2 className="book-head">Upcoming events</h2>
+      {!events.length && (
+        <p className="events__empty">
+          No events are scheduled right now. Check back soon, or call <a href="tel:+61412499700">0412 499 700</a>.
+        </p>
+      )}
       <div className="events__list">
         {events.map((e) => {
           const when =
@@ -62,7 +66,6 @@ export function UpcomingEvents({ events }: { events: EventItem[] }) {
           );
         })}
       </div>
-      <h2 className="book-head">Book online</h2>
     </div>
   );
 }

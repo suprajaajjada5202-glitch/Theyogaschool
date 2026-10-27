@@ -5598,7 +5598,10 @@ main > section {
 .drop {
   left: 50%;
   right: auto;
-  width: 270px;
+  /* As wide as its longest row (rows don't wrap), so every row keeps the same inset on both sides */
+  width: max-content;
+  min-width: 240px;
+  max-width: 340px;
   top: calc(100% + 16px);
   transform: translate(-50%, -8px);
   transform-origin: 50% 0;
@@ -5741,6 +5744,10 @@ main > section {
 }
 
 /* minmax(0, …): a long unbroken word or web address in a description must not widen the cards past the screen */
+.events__empty {
+  text-align: center;
+  color: var(--c-ink-soft);
+}
 .events__list {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
