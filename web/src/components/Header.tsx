@@ -306,6 +306,7 @@ export function Header() {
                   href={n.href}
                   className={isCurrent(n.href) ? "is-active" : undefined}
                   aria-current={isCurrent(n.href) ? "page" : undefined}
+                  {...(/^https?:/.test(n.href) && { target: "_blank", rel: "noopener" })}
                   onClick={() => setMenuOpen(false)}
                 >
                   <TileIcon d={n.icon} />

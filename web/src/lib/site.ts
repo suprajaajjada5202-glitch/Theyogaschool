@@ -29,6 +29,7 @@ const I = {
   video: "M4 6h12v12H4zM16 10l4-2v8l-4-2",
 };
 export const MOMENCE_VIDEOS = "https://momence.com/video/plugin/23652";
+export const MOMENCE_SHOP = "https://momence.com/The-Yoga-School/products/23652";
 
 const N = (href: string, label: string, sub: string, icon: string): NavItem => ({ href, label, sub, icon });
 
@@ -42,11 +43,10 @@ export const ABOUT: NavItem[] = [
 ];
 
 /** "Shop" dropdown (same three links as the old site's Shop menu). "Shop" itself and "Props & equipment" open the
-    website's Shop page (the live Momence catalogue, each product with its own Buy link); links starting with http
-    open Momence in a new tab. */
+    Momence online shop; links starting with http open Momence in a new tab. */
 export const SHOP: NavItem[] = [
   N("/pages/prices#passes", "Class passes", "Drop-ins, class packs & unlimited", I.ticket),
-  N("/pages/shop", "Props & equipment", "Mats, blocks, books & more", I.shop),
+  N(MOMENCE_SHOP, "Props & equipment", "Mats, blocks, books & more", I.shop),
   N(MOMENCE_VIDEOS, "On-demand videos", "Practise at home", I.video),
 ];
 
@@ -57,7 +57,7 @@ export const NAV: NavEntry[] = [
   N("/pages/timetable", "Timetable", "Live timetable", I.schedule),
   N("/pages/prices", "Prices", "Passes & memberships", I.prices),
   { ...N("/pages/about", "About", "Our story", I.about), children: ABOUT },
-  { ...N("/pages/shop", "Shop", "Mats, blocks, books & more", I.shop), children: SHOP },
+  { ...N(MOMENCE_SHOP, "Shop", "Mats, blocks, books & more", I.shop), children: SHOP },
   N("/pages/events", "Events", "Workshops & specials", I.events),
   N("/pages/blog1", "Blog", "Reflections on practice", I.blog),
   N("/pages/teacher-training", "Teacher Training", "With the Masters", I.training),

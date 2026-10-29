@@ -4273,16 +4273,29 @@ details[open] > summary .plus::after {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
+/* Sits in the banner's top white strip, clear of the artwork */
 .offer__close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
   z-index: 1;
+  width: 36px;
+  height: 36px;
+  background: #ffffff;
+  color: #0f1f3d;
+  border: 1px solid rgba(15, 31, 61, 0.15);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.offer__close svg {
+  width: 16px;
+  height: 16px;
 }
 /* The banner artwork has black text, so it always sits on white (dark mode too) */
 .offer__banner {
   display: block;
-  padding: var(--s-2) var(--s-2) 0;
+  padding: 52px var(--s-2) var(--s-2);
   background: #ffffff;
 }
 .offer__banner img {
