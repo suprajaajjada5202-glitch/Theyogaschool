@@ -60,12 +60,13 @@ export default function VideosPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="https://i.ytimg.com/vi/X9W4SDA4m8Q/hqdefault.jpg"
-                alt="James Bryan introducing the Knoff Yoga system"
-                width="480"
+                src="/images/headers/videos.jpg"
+                alt="A full class in cobra pose"
+                width="960"
                 height="360"
+                style={{ objectPosition: "43% 50%" }}
               />
             </div>{" "}
           </Reveal>{" "}

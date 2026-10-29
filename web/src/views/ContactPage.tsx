@@ -55,12 +55,13 @@ export default function ContactPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/gallery/DSC00217.jpg"
-                alt="The studio with mats and blocks laid out"
-                width="1000"
-                height="563"
+                src="/images/headers/contact.jpg"
+                alt="Students kneeling on their mats at the start of class"
+                width="800"
+                height="300"
+                style={{ objectPosition: "40% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">

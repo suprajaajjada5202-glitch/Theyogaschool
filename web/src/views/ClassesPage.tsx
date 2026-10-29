@@ -67,12 +67,13 @@ export default async function ClassesPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/gallery/DSC00131.jpg"
-                alt="A mixed class in warrior and triangle poses"
-                width="1000"
-                height="563"
+                src="/images/headers/classes.jpg"
+                alt="A teacher gently adjusting a student in child's pose"
+                width="960"
+                height="360"
+                style={{ objectPosition: "30% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">
@@ -151,6 +152,14 @@ export default async function ClassesPage() {
               highest intensity during every practice. Have both challenging and then also less intense practice days. Your body
               and mind will appreciate it. This helps keep you motivated and inspired and also gives you access to a greater
               variety of classes and times to fit your schedule.
+            </p>
+            <p>
+              <Link className="btn btn--outline" href="/pages/teacher-training">
+                Learn about our Teacher Training courses{" "}
+                <svg aria-hidden="true">
+                  <use href="#i-arrow" />
+                </svg>
+              </Link>
             </p>
           </Reveal>{" "}
         </div>{" "}

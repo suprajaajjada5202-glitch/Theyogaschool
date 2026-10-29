@@ -58,11 +58,13 @@ export default async function ShopPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
-                src="/images/gallery/DSC00217.jpg"
-                alt="The studio with mats, blocks and props laid out"
-                width="1000"
-                height="563"
+              <img
+                decoding="async"
+                src="/images/headers/studio.jpg"
+                alt="The studio set up with mats and blocks, ready for class"
+                width="800"
+                height="300"
+                style={{ objectPosition: "51% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">
@@ -76,9 +78,12 @@ export default async function ShopPage() {
           </Reveal>{" "}
         </div>{" "}
       </section>{" "}
-      <section className="section" style={{ paddingTop: "var(--s-4)" }} aria-label="Products">
+      <section className="section" style={{ paddingTop: "var(--s-4)" }} aria-labelledby="shop-title">
         {" "}
         <div className="container">
+          <h2 id="shop-title" className="sr-only">
+            Products
+          </h2>
           {" "}
           <Products products={products} />{" "}
         </div>{" "}

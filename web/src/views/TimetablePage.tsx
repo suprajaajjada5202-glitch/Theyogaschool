@@ -47,12 +47,13 @@ export default async function TimetablePage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/gallery/DSC00184.jpg"
-                alt="A class standing in a wide-legged pose"
-                width="1000"
-                height="563"
+                src="/images/headers/timetable.jpg"
+                alt="Students in warrior pose in the studio"
+                width="960"
+                height="360"
+                style={{ objectPosition: "57% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">
@@ -66,9 +67,12 @@ export default async function TimetablePage() {
           </Reveal>{" "}
         </div>{" "}
       </section>{" "}
-      <section className="section" style={{ paddingTop: "var(--s-4)" }} aria-label="Live timetable">
+      <section className="section" style={{ paddingTop: "var(--s-4)" }} aria-labelledby="tt-title">
         {" "}
         <div className="container">
+          <h2 id="tt-title" className="sr-only">
+            Live timetable
+          </h2>
           {" "}
           <Timetable rows={timetable} />{" "}
           <Reveal className="schedule" id="book" tabIndex={0} role="region" aria-label="Live class timetable, scrollable">

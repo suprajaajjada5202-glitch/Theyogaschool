@@ -45,12 +45,13 @@ export default function FaqsPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/gallery/DSC00121-2.jpg"
-                alt="A student kneeling with hands in prayer position"
-                width="714"
-                height="1000"
+                src="/images/headers/studio.jpg"
+                alt="The studio set up with mats and blocks, ready for class"
+                width="800"
+                height="300"
+                style={{ objectPosition: "51% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">
@@ -118,6 +119,16 @@ export default function FaqsPage() {
                 I'm not really into group classes. What are my options?<span className="faq__icon" aria-hidden="true"></span>
               </summary>{" "}
               <p>We offer private sessions and can also cater for small private groups.</p>{" "}
+            </Reveal>{" "}
+            <Reveal as="details" className="faq">
+              {" "}
+              <summary>
+                My workplace needs some education in posture and wellbeing.<span className="faq__icon" aria-hidden="true"></span>
+              </summary>{" "}
+              <p>
+                We can provide your workplace with yoga and wellbeing workshops. Please call us to arrange a detailed quote for
+                corporate sessions, or see <Link href="/workplace-wellbeing">Workplace Wellbeing</Link>.
+              </p>{" "}
             </Reveal>{" "}
             <Reveal as="details" className="faq">
               {" "}

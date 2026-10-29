@@ -190,11 +190,12 @@ export function Header() {
 
   return (
     <>
-      {/* The old site's top band: tagline, FAQs and the new student offer */}
+      {/* The old site's top band: tagline, phone, FAQs and the new student offer */}
       <div className="topbar on-dark" ref={topbar}>
         <div className="container topbar__inner">
           <p className="topbar__tagline">Stretch your body, calm your mind</p>
           <nav className="topbar__links" aria-label="Quick links">
+            <a href="tel:+61412499700">0412 499 700</a>
             <Link href="/pages/faqs" aria-current={isCurrent("/pages/faqs") ? "page" : undefined}>
               FAQs
             </Link>

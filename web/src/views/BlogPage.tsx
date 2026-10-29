@@ -48,20 +48,24 @@ export default async function BlogPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/yoga-mind_copy.png"
-                alt="Silhouette of a person meditating in front of misty mountains"
-                width="563"
-                height="353"
+                src="/images/headers/studio.jpg"
+                alt="The studio set up with mats and blocks, ready for class"
+                width="800"
+                height="300"
+                style={{ objectPosition: "51% 50%" }}
               />
             </div>{" "}
           </Reveal>{" "}
         </div>{" "}
       </section>{" "}
-      <section className="section" style={{ paddingTop: "var(--s-4)" }} aria-label="Articles">
+      <section className="section" style={{ paddingTop: "var(--s-4)" }} aria-labelledby="articles-title">
         {" "}
         <div className="container">
+          <h2 id="articles-title" className="sr-only">
+            Articles
+          </h2>
           {" "}
           <PostGrid posts={posts} feature />{" "}
         </div>{" "}

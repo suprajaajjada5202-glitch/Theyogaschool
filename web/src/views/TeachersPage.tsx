@@ -58,12 +58,13 @@ export default function TeachersPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/teachers/teacher_2.jpg"
-                alt="Rossi Postler in a deep backbend"
-                width="570"
-                height="640"
+                src="/images/headers/teachers.jpg"
+                alt="A full class holding shoulder stand"
+                width="960"
+                height="360"
+                style={{ objectPosition: "55% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">

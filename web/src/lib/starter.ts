@@ -103,21 +103,19 @@ export async function starterRows(table: ContentTable, classSlugs: Set<string>):
         published: true,
       }));
     case "gift_vouchers": {
-      // Voucher amounts follow the current class prices on the Prices page
-      const pass = (title: string, name: string) =>
-        site.passes.find((g) => g.title === title)?.items.find((i) => i.name === name)?.price;
-      const v = (name: string, label: string | undefined, description: string, sort: number) => ({
+      // Voucher amounts as listed on the live site's Gift Vouchers page (same as the page's built-in cards)
+      const v = (name: string, label: string, description: string, sort: number) => ({
         name,
-        price: label ? priceOf(label).price : null,
+        price: priceOf(label).price,
         description,
         buy_url: VOUCHER_URL,
         sort,
         published: true,
       });
       return [
-        v("1 class", pass("Drop in", "Adult"), "A single class at The Yoga School.", 10),
-        v("5 classes", pass("Class passes", "5 classes"), "A 5-class pack, valid 6 months from first use.", 20),
-        v("20 classes", pass("Class passes", "20 classes"), "A 20-class pack, valid 12 months from first use.", 30),
+        v("1 class", "$30", "A single class at The Yoga School.", 10),
+        v("5 classes", "$110", "A 5-class pack, valid 6 months from first use.", 20),
+        v("20 classes", "$320", "A 20-class pack, valid 12 months from first use.", 30),
         v("30 days unlimited (new students)", "$99", "30 days of unlimited classes for someone new to The Yoga School.", 40),
       ];
     }

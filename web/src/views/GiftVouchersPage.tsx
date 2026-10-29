@@ -60,12 +60,13 @@ export default async function GiftVouchersPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/gallery/DSC00121-2.jpg"
-                alt="A student kneeling with hands in prayer position"
-                width="714"
-                height="1000"
+                src="/images/headers/studio.jpg"
+                alt="The studio set up with mats and blocks, ready for class"
+                width="800"
+                height="300"
+                style={{ objectPosition: "51% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">
@@ -79,9 +80,12 @@ export default async function GiftVouchersPage() {
           </Reveal>{" "}
         </div>{" "}
       </section>{" "}
-      <section className="section" style={{ paddingTop: "var(--s-4)" }} aria-label="Gift voucher options">
+      <section className="section" style={{ paddingTop: "var(--s-4)" }} aria-labelledby="vouchers-title">
         {" "}
         <div className="container">
+          <h2 id="vouchers-title" className="sr-only">
+            Gift voucher options
+          </h2>
           {" "}
           <Vouchers vouchers={vouchers}>
             <div className="info-cards">
@@ -100,7 +104,7 @@ export default async function GiftVouchersPage() {
                   </svg>
                 </span>
                 <h3>Class vouchers</h3>
-                <p>Single classes and class packs for friends and family.</p>
+                <p>$30 for 1 class, $110 for 5 classes or $320 for 20 classes, for friends and family.</p>
                 <a className="link-arrow" href="https://momence.com/gcc/23652" target="_blank" rel="noopener">
                   Buy online{" "}
                   <svg aria-hidden="true">

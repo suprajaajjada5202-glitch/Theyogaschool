@@ -57,14 +57,24 @@ export default function AboutPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
+                decoding="async"
+                src="/images/headers/about.jpg"
+                alt="A class in triangle pose in front of The Yoga School logo"
+                width="960"
+                height="360"
+                style={{ objectPosition: "60% 50%" }}
+              />
+            </div>{" "}
+            <span className="arch__inset">
+              <img
                 decoding="async"
                 src="/images/master-teachers.jpg"
                 alt="Master Teachers Nicky Knoff and James Bryan"
                 width="684"
                 height="629"
               />
-            </div>{" "}
+            </span>{" "}
             <p className="arch__badge">
               <span>
                 <svg aria-hidden="true">
@@ -140,54 +150,17 @@ export default function AboutPage() {
       </svg>{" "}
       <section className="section section--tint" style={{ paddingTop: "var(--s-6)" }} aria-labelledby="knoff-title">
         {" "}
-        <div className="container split split--even">
-          {" "}
-          <Reveal>
-            {" "}
-            <p className="eyebrow">Knoff Yoga definition</p>{" "}
+        <div className="container knoff">
+          {/* Left: title, quote and photo stay in view (desktop) while the definition is read on the right */}
+          <Reveal className="knoff__aside">
+            <p className="eyebrow">Knoff Yoga definition</p>
             <h2 id="knoff-title">
               The body and mind are <em>two sides of the same coin</em>
-            </h2>{" "}
-            <div className="prose prose-lg">
-              <p>
-                Knoff Yoga is a traditional style of Hatha Yoga, which utilises the body as a vehicle/tool to increase awareness.
-                All of the techniques—meditation, breath-work, postures, relaxation and philosophy—are designed to turn the mind
-                inwards. The idea is to be in the present moment, not thinking about the past or projecting into the future
-              </p>{" "}
-              <p>
-                Being aware of our body and breath is a fantastic way to gain insight into our particular emotional and mental
-                states. Using the techniques of Knoff Yoga, we then have the option to make changes in our physical health and
-                mind-states, if we wish.
-              </p>{" "}
-              <p>
-                Knoff Yoga is designed to enhance our wellbeing on every level. More strength, more flexibility, more clarity,
-                more energy—and all from a centre of emotional balance.
-              </p>
-            </div>{" "}
-          </Reveal>{" "}
-          <Reveal delay={1}>
-            {" "}
-            <div className="prose">
-              <p>
-                The concepts behind Knoff Yoga are simple and easy to understand. The body and mind are two sides of the same
-                coin. What we do with one affects the other. You cannot have a thought without it affecting the body and you
-                cannot activate the body without it impacting on the mind. They are one.
-              </p>{" "}
-              <p>
-                Increased awareness, combined with increased mobility and vitality, gives you the opportunity to make the most of
-                your precious life.
-              </p>{" "}
-              <p>
-                Most people come into Yoga with a physical issue they wish to resolve, e.g. bad back, high levels of stress, or
-                starting to feel old, etc. The goal of Knoff Yoga is to give you the tools and encouragement to make positive
-                changes in the direction you choose.
-              </p>
-            </div>{" "}
+            </h2>
             <blockquote className="pull">
               Life has provided you with a vehicle. Knoff Yoga is the owner’s manual.<cite>The Knoff Yoga philosophy</cite>
-            </blockquote>{" "}
-            <div className="arch" style={{ marginTop: "var(--s-5)" }}>
-              {" "}
+            </blockquote>
+            <div className="arch knoff__photo">
               <div className="arch__frame">
                 <img
                   decoding="async"
@@ -197,9 +170,57 @@ export default function AboutPage() {
                   height="563"
                   loading="lazy"
                 />
-              </div>{" "}
-            </div>{" "}
-          </Reveal>{" "}
+              </div>
+            </div>
+          </Reveal>
+          <Reveal delay={1} className="knoff__text">
+            <p className="lead knoff__intro">
+              Knoff Yoga is a traditional style of Hatha Yoga, which utilises the body as a vehicle/tool to increase awareness.
+              All of the techniques—meditation, breath-work, postures, relaxation and philosophy—are designed to turn the mind
+              inwards. The idea is to be in the present moment, not thinking about the past or projecting into the future.
+            </p>
+            <div className="prose">
+              <p>
+                Being aware of our body and breath is a fantastic way to gain insight into our particular emotional and mental
+                states. Using the techniques of Knoff Yoga, we then have the option to make changes in our physical health and
+                mind-states, if we wish.
+              </p>
+              <p>
+                Knoff Yoga is designed to enhance our wellbeing on every level. More strength, more flexibility, more clarity,
+                more energy—and all from a centre of emotional balance.
+              </p>
+            </div>
+            <ul className="knoff__gains" aria-label="What Knoff Yoga builds">
+              <li>
+                <b>More</b> strength
+              </li>
+              <li>
+                <b>More</b> flexibility
+              </li>
+              <li>
+                <b>More</b> clarity
+              </li>
+              <li>
+                <b>More</b> energy
+              </li>
+            </ul>
+            <div className="prose">
+              <p>
+                The concepts behind Knoff Yoga are simple and easy to understand. The body and mind are two sides of the same
+                coin. What we do with one affects the other. You cannot have a thought without it affecting the body and you
+                cannot activate the body without it impacting on the mind. They are one.
+              </p>
+              <p>
+                Increased awareness, combined with increased mobility and vitality, gives you the opportunity to make the most of
+                your precious life.
+              </p>
+              <p>
+                Most people come into Yoga with a physical issue they wish to resolve, e.g. bad back, high levels of stress, or
+                starting to feel old, etc. The goal of Knoff Yoga is to give you the tools and encouragement to make positive
+                changes in the direction you choose.
+              </p>
+            </div>
+          </Reveal>
         </div>{" "}
       </section>{" "}
       <section className="section" aria-labelledby="air-title">

@@ -46,12 +46,13 @@ export default function GalleryPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/gallery/DSC00203.jpg"
-                alt="A student seated in front of The Yoga School logo"
-                width="563"
-                height="1000"
+                src="/images/headers/gallery.jpg"
+                alt="James Bryan stretching with arms raised among students"
+                width="960"
+                height="360"
+                style={{ objectPosition: "46% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">

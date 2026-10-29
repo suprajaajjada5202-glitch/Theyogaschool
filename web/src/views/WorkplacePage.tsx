@@ -54,12 +54,13 @@ export default function WorkplacePage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/gallery/DSC00128.jpg"
-                alt="A large group practising triangle pose together"
-                width="1000"
-                height="563"
+                src="/images/headers/studio.jpg"
+                alt="The studio set up with mats and blocks, ready for class"
+                width="800"
+                height="300"
+                style={{ objectPosition: "51% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">
@@ -123,7 +124,7 @@ export default function WorkplacePage() {
                     <path d="M3 20a6 6 0 0 1 12 0M15 20a4.5 4.5 0 0 1 6-4.2" />
                   </g>
                 </svg>
-                Better team dynamics
+                Better team dynamics and greater awareness
               </li>{" "}
             </ul>{" "}
           </Reveal>{" "}

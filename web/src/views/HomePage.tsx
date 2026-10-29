@@ -456,14 +456,14 @@ export default async function HomePage() {
               {" "}
               <li className="slide teacher">
                 {" "}
-                <Link className="teacher__btn" href="/pages/teachers#ronnieperry" aria-label="Read Ronnie Perry's bio">
+                <Link className="teacher__btn" href="/pages/teachers#owenscotts" aria-label="Read Owen Scotts's bio">
                   {" "}
                   <span className="teacher__photo">
                     <img
                       decoding="async"
-                      src="/images/teachers/teacher_0.jpg"
-                      alt="Portrait of Ronnie Perry"
-                      width="456"
+                      src="/images/teachers/teacher_10.jpg"
+                      alt="Portrait of Owen Scotts"
+                      width="457"
                       height="640"
                       loading="lazy"
                     />
@@ -475,8 +475,8 @@ export default async function HomePage() {
                     </svg>
                   </span>{" "}
                 </Link>{" "}
-                <h3>Ronnie Perry</h3> <p className="teacher__role">Studio Owner & Teacher</p>{" "}
-                <p className="teacher__spec">200 hrs Knoff teacher training · owner since 2018</p>{" "}
+                <h3>Owen Scotts</h3> <p className="teacher__role">Concierge</p>{" "}
+                <p className="teacher__spec">Welcoming new students for over 19 years</p>{" "}
               </li>{" "}
               <li className="slide teacher">
                 {" "}
@@ -528,78 +528,6 @@ export default async function HomePage() {
               </li>{" "}
               <li className="slide teacher">
                 {" "}
-                <Link className="teacher__btn" href="/pages/teachers#tomokogregory" aria-label="Read Tomoko Gregory's bio">
-                  {" "}
-                  <span className="teacher__photo">
-                    <img
-                      decoding="async"
-                      src="/images/teachers/teacher_3.jpg"
-                      alt="Portrait of Tomoko Gregory"
-                      width="605"
-                      height="640"
-                      loading="lazy"
-                    />
-                  </span>{" "}
-                  <span className="teacher__more" aria-hidden="true">
-                    Read bio{" "}
-                    <svg>
-                      <use href="#i-arrow" />
-                    </svg>
-                  </span>{" "}
-                </Link>{" "}
-                <h3>Tomoko Gregory</h3> <p className="teacher__role">Yoga Teacher</p>{" "}
-                <p className="teacher__spec">All 9 levels of Knoff teacher training</p>{" "}
-              </li>{" "}
-              <li className="slide teacher">
-                {" "}
-                <Link className="teacher__btn" href="/pages/teachers#janwatson" aria-label="Read Jan Watson's bio">
-                  {" "}
-                  <span className="teacher__photo">
-                    <img
-                      decoding="async"
-                      src="/images/teachers/teacher_4.jpg"
-                      alt="Portrait of Jan Watson"
-                      width="640"
-                      height="593"
-                      loading="lazy"
-                    />
-                  </span>{" "}
-                  <span className="teacher__more" aria-hidden="true">
-                    Read bio{" "}
-                    <svg>
-                      <use href="#i-arrow" />
-                    </svg>
-                  </span>{" "}
-                </Link>{" "}
-                <h3>Jan Watson</h3> <p className="teacher__role">Yoga Teacher</p>{" "}
-                <p className="teacher__spec">Certified Iyengar teacher · Senior Teacher, Yoga Australia</p>{" "}
-              </li>{" "}
-              <li className="slide teacher">
-                {" "}
-                <Link className="teacher__btn" href="/pages/teachers#nicolamellick" aria-label="Read Nicola Mellick's bio">
-                  {" "}
-                  <span className="teacher__photo">
-                    <img
-                      decoding="async"
-                      src="/images/teachers/teacher_5.jpg"
-                      alt="Portrait of Nicola Mellick"
-                      width="455"
-                      height="640"
-                      loading="lazy"
-                    />
-                  </span>{" "}
-                  <span className="teacher__more" aria-hidden="true">
-                    Read bio{" "}
-                    <svg>
-                      <use href="#i-arrow" />
-                    </svg>
-                  </span>{" "}
-                </Link>{" "}
-                <h3>Nicola Mellick</h3> <p className="teacher__role">Yoga Teacher</p>{" "}
-                <p className="teacher__spec">Pregnancy yoga · Yoga Therapy A & B</p>{" "}
-              </li>{" "}
-              <li className="slide teacher">
-                {" "}
                 <Link className="teacher__btn" href="/pages/teachers#jenniferearl" aria-label="Read Jennifer Earl's bio">
                   {" "}
                   <span className="teacher__photo">
@@ -621,6 +549,30 @@ export default async function HomePage() {
                 </Link>{" "}
                 <h3>Jennifer Earl</h3> <p className="teacher__role">Yoga Teacher</p>{" "}
                 <p className="teacher__spec">Hatha yoga & Ayurveda, studied in India</p>{" "}
+              </li>{" "}
+              <li className="slide teacher">
+                {" "}
+                <Link className="teacher__btn" href="/pages/teachers#ronnieperry" aria-label="Read Ronnie Perry's bio">
+                  {" "}
+                  <span className="teacher__photo">
+                    <img
+                      decoding="async"
+                      src="/images/teachers/teacher_0.jpg"
+                      alt="Portrait of Ronnie Perry"
+                      width="456"
+                      height="640"
+                      loading="lazy"
+                    />
+                  </span>{" "}
+                  <span className="teacher__more" aria-hidden="true">
+                    Read bio{" "}
+                    <svg>
+                      <use href="#i-arrow" />
+                    </svg>
+                  </span>{" "}
+                </Link>{" "}
+                <h3>Ronnie Perry</h3> <p className="teacher__role">Teacher & Studio Owner</p>{" "}
+                <p className="teacher__spec">200 hrs Knoff teacher training · owner since 2018</p>{" "}
               </li>{" "}
               <li className="slide teacher">
                 {" "}
@@ -696,14 +648,14 @@ export default async function HomePage() {
               </li>{" "}
               <li className="slide teacher">
                 {" "}
-                <Link className="teacher__btn" href="/pages/teachers#owenscotts" aria-label="Read Owen Scotts's bio">
+                <Link className="teacher__btn" href="/pages/teachers#nicolamellick" aria-label="Read Nicola Mellick's bio">
                   {" "}
                   <span className="teacher__photo">
                     <img
                       decoding="async"
-                      src="/images/teachers/teacher_10.jpg"
-                      alt="Portrait of Owen Scotts"
-                      width="457"
+                      src="/images/teachers/teacher_5.jpg"
+                      alt="Portrait of Nicola Mellick"
+                      width="455"
                       height="640"
                       loading="lazy"
                     />
@@ -715,8 +667,56 @@ export default async function HomePage() {
                     </svg>
                   </span>{" "}
                 </Link>{" "}
-                <h3>Owen Scotts</h3> <p className="teacher__role">Concierge</p>{" "}
-                <p className="teacher__spec">Welcoming new students for over 19 years</p>{" "}
+                <h3>Nicola Mellick</h3> <p className="teacher__role">Yoga Teacher</p>{" "}
+                <p className="teacher__spec">Pregnancy yoga · Yoga Therapy A & B</p>{" "}
+              </li>{" "}
+              <li className="slide teacher">
+                {" "}
+                <Link className="teacher__btn" href="/pages/teachers#janwatson" aria-label="Read Jan Watson's bio">
+                  {" "}
+                  <span className="teacher__photo">
+                    <img
+                      decoding="async"
+                      src="/images/teachers/teacher_4.jpg"
+                      alt="Portrait of Jan Watson"
+                      width="640"
+                      height="593"
+                      loading="lazy"
+                    />
+                  </span>{" "}
+                  <span className="teacher__more" aria-hidden="true">
+                    Read bio{" "}
+                    <svg>
+                      <use href="#i-arrow" />
+                    </svg>
+                  </span>{" "}
+                </Link>{" "}
+                <h3>Jan Watson</h3> <p className="teacher__role">Yoga Teacher</p>{" "}
+                <p className="teacher__spec">Certified Iyengar teacher · Senior Teacher, Yoga Australia</p>{" "}
+              </li>{" "}
+              <li className="slide teacher">
+                {" "}
+                <Link className="teacher__btn" href="/pages/teachers#tomokogregory" aria-label="Read Tomoko Gregory's bio">
+                  {" "}
+                  <span className="teacher__photo">
+                    <img
+                      decoding="async"
+                      src="/images/teachers/teacher_3.jpg"
+                      alt="Portrait of Tomoko Gregory"
+                      width="605"
+                      height="640"
+                      loading="lazy"
+                    />
+                  </span>{" "}
+                  <span className="teacher__more" aria-hidden="true">
+                    Read bio{" "}
+                    <svg>
+                      <use href="#i-arrow" />
+                    </svg>
+                  </span>{" "}
+                </Link>{" "}
+                <h3>Tomoko Gregory</h3> <p className="teacher__role">Yoga Teacher</p>{" "}
+                <p className="teacher__spec">All 9 levels of Knoff teacher training</p>{" "}
               </li>{" "}
             </SliderTrack>{" "}
             <div className="slider-foot">
@@ -755,7 +755,7 @@ export default async function HomePage() {
                   <svg aria-hidden="true">
                     <use href="#i-check" />
                   </svg>
-                  <span>Over 21 years combined teacher training experience and over 8 decades teaching yoga</span>
+                  <span>Over 21 years combined Teacher Training experience and over 8 decades teaching Yoga</span>
                 </li>{" "}
                 <li>
                   <svg aria-hidden="true">
@@ -767,7 +767,7 @@ export default async function HomePage() {
                   <svg aria-hidden="true">
                     <use href="#i-check" />
                   </svg>
-                  <span>9 levels of training, from Discovery to Master</span>
+                  <span>9 levels of training (Discovery to Master)</span>
                 </li>{" "}
                 <li>
                   <svg aria-hidden="true">
@@ -800,8 +800,18 @@ export default async function HomePage() {
                   Ask about training
                 </Link>{" "}
               </div>{" "}
+              <p className="badges__note">Knoff Yoga is registered with Yoga Alliance (RYS200 and RYS300)</p>
               <div className="badges">
                 {" "}
+                <img
+                  decoding="async"
+                  className="wide"
+                  src="https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/YA_copy.png"
+                  alt="Yoga Alliance"
+                  width="448"
+                  height="206"
+                  loading="lazy"
+                />{" "}
                 <img
                   decoding="async"
                   src="https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/the-yoga-school/S01-YA-SCHOOL-RYS-200.png"
@@ -829,16 +839,39 @@ export default async function HomePage() {
                 />{" "}
               </div>{" "}
             </Reveal>{" "}
-            <Reveal delay={1}>
-              {" "}
+            <Reveal delay={1} className="tt-photo">
+              <figure>
+                <img
+                  decoding="async"
+                  src="/images/master-teachers.jpg"
+                  alt="Master Teachers Nicky Knoff and James Bryan"
+                  width="684"
+                  height="629"
+                  loading="lazy"
+                />
+                <figcaption>Master Teachers, Nicky Knoff and James Bryan</figcaption>
+              </figure>
+            </Reveal>{" "}
+          </div>{" "}
+        </div>{" "}
+      </section>{" "}
+      <section className="section section--dark on-dark" style={{ paddingTop: 0 }} aria-labelledby="overview-title">
+        <div className="container">
+          <Reveal className="tt-video">
+            <p className="eyebrow">Watch</p>
+            <h2 id="overview-title">
+              Knoff Yoga <em>overview</em>
+            </h2>
               <InlineYouTube
                 id="X9W4SDA4m8Q"
                 label="Play video: Knoff Yoga Overview (8 minutes 50 seconds)"
                 caption="▶ Knoff Yoga Overview · 8:50"
                 thumb="https://i.ytimg.com/vi/X9W4SDA4m8Q/maxresdefault.jpg"
               />{" "}
-            </Reveal>{" "}
-          </div>{" "}
+            <p className="tt-channel">
+              <Link href="/pages/videos">Watch more of our videos</Link>
+            </p>
+          </Reveal>{" "}
         </div>{" "}
       </section>{" "}
       <section
@@ -854,6 +887,14 @@ export default async function HomePage() {
             What our students say
           </h2>{" "}
           <TestimonialSlider />{" "}
+          <Reveal className="section-foot">
+            <Link className="btn btn--glass" href="/pages/testimonials">
+              Read more student stories{" "}
+              <svg aria-hidden="true">
+                <use href="#i-arrow" />
+              </svg>
+            </Link>
+          </Reveal>{" "}
         </div>{" "}
       </section>{" "}
       <section className="section" aria-labelledby="pricing-title">

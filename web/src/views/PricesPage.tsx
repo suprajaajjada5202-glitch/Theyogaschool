@@ -62,12 +62,13 @@ export default async function PricesPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/gallery/DSC00180.jpg"
-                alt="Students balancing in tree pose"
-                width="1000"
-                height="714"
+                src="/images/headers/classes.jpg"
+                alt="A teacher gently adjusting a student in child's pose"
+                width="960"
+                height="360"
+                style={{ objectPosition: "30% 50%" }}
               />
             </div>{" "}
             <p className="arch__badge">

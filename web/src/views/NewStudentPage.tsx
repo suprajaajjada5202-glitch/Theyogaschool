@@ -46,8 +46,11 @@ export default function NewStudentPage() {
           </a>
         </div>
       </SimpleHero>
-      <section className="section" style={{ paddingTop: "var(--s-2)" }}>
+      <section className="section" style={{ paddingTop: "var(--s-2)" }} aria-labelledby="steps-title">
         <div className="container">
+          <h2 id="steps-title" className="sr-only">
+            Getting started in three steps
+          </h2>
           <div className="info-cards">
             {STEPS.map((s, i) => (
               <Reveal className="info-card" key={s.title} delay={i || undefined}>

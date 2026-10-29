@@ -60,15 +60,16 @@ export default function TeacherTrainingPage() {
           <Reveal delay={1} className="arch">
             {" "}
             <div className="arch__frame">
-              <img loading="lazy"
+              <img
                 decoding="async"
-                src="/images/master-teachers.jpg"
-                alt="Master Teachers Nicky Knoff and James Bryan"
-                width="684"
-                height="629"
+                src="/images/headers/teacher-training.jpg"
+                alt="James Bryan and a teacher assisting a student in a supported bridge pose"
+                width="960"
+                height="360"
+                style={{ objectPosition: "58% 50%" }}
               />
             </div>{" "}
-            <p className="arch__badge">
+<p className="arch__badge">
               <span>
                 <svg aria-hidden="true">
                   <use href="#i-check" />
@@ -87,21 +88,17 @@ export default function TeacherTrainingPage() {
             {" "}
             <Reveal>
               {" "}
-              <p className="eyebrow">Teacher training</p>{" "}
+              <p className="eyebrow">Why train with us</p>{" "}
               <h2 id="training-title">
-                Train with the <em>Masters</em>
+                Study exclusively with world-renowned <em>Master Teachers</em>, Nicky Knoff and James Bryan
               </h2>{" "}
-              <p className="lead">
-                Study exclusively with world-renowned Master Teachers Nicky Knoff and James Bryan. Teacher training is provided by
-                The Yoga School’s sister company, Knoff Yoga.
-              </p>{" "}
               <ul className="facts">
                 {" "}
                 <li>
                   <svg aria-hidden="true">
                     <use href="#i-check" />
                   </svg>
-                  <span>Over 21 years combined teacher training experience and over 8 decades teaching yoga</span>
+                  <span>Over 21 years combined Teacher Training experience and over 8 decades teaching Yoga</span>
                 </li>{" "}
                 <li>
                   <svg aria-hidden="true">
@@ -113,7 +110,7 @@ export default function TeacherTrainingPage() {
                   <svg aria-hidden="true">
                     <use href="#i-check" />
                   </svg>
-                  <span>9 levels of training, from Discovery to Master</span>
+                  <span>9 levels of training (Discovery to Master)</span>
                 </li>{" "}
                 <li>
                   <svg aria-hidden="true">
@@ -137,7 +134,7 @@ export default function TeacherTrainingPage() {
               <div className="hero__actions">
                 {" "}
                 <a className="btn btn--teal" href="http://www.knoffyoga.com" target="_blank" rel="noopener">
-                  Explore courses at Knoff Yoga{" "}
+                  Learn more about our Teacher Training courses{" "}
                   <svg aria-hidden="true">
                     <use href="#i-arrow" />
                   </svg>
@@ -146,8 +143,18 @@ export default function TeacherTrainingPage() {
                   Ask about training
                 </Link>{" "}
               </div>{" "}
+              <p className="badges__note">Knoff Yoga is registered with Yoga Alliance (RYS200 and RYS300)</p>
               <div className="badges">
                 {" "}
+                <img
+                  decoding="async"
+                  className="wide"
+                  src="https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/YA_copy.png"
+                  alt="Yoga Alliance"
+                  width="448"
+                  height="206"
+                  loading="lazy"
+                />{" "}
                 <img
                   decoding="async"
                   src="https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/the-yoga-school/S01-YA-SCHOOL-RYS-200.png"
@@ -175,16 +182,43 @@ export default function TeacherTrainingPage() {
                 />{" "}
               </div>{" "}
             </Reveal>{" "}
-            <Reveal delay={1}>
-              {" "}
+            <Reveal delay={1} className="tt-photo">
+              <figure>
+                <img
+                  decoding="async"
+                  src="/images/master-teachers.jpg"
+                  alt="Master Teachers Nicky Knoff and James Bryan"
+                  width="684"
+                  height="629"
+                  loading="lazy"
+                />
+                <figcaption>Master Teachers, Nicky Knoff and James Bryan</figcaption>
+              </figure>
+            </Reveal>{" "}
+          </div>{" "}
+        </div>{" "}
+      </section>{" "}
+      <section className="section section--dark on-dark" style={{ paddingTop: 0 }} aria-labelledby="overview-title">
+        <div className="container">
+          <Reveal className="tt-video">
+            <p className="eyebrow">Watch</p>
+            <h2 id="overview-title">
+              Knoff Yoga <em>overview</em>
+            </h2>
               <InlineYouTube
                 id="X9W4SDA4m8Q"
                 label="Play video: Knoff Yoga Overview (8 minutes 50 seconds)"
                 caption="▶ Knoff Yoga Overview · 8:50"
                 thumb="https://i.ytimg.com/vi/X9W4SDA4m8Q/maxresdefault.jpg"
               />{" "}
-            </Reveal>{" "}
-          </div>{" "}
+            <p className="tt-channel">
+              For a look inside Yoga Teacher Training, visit the{" "}
+              <a href="https://www.youtube.com/channel/UCabYu3TNwmNGifZa-zml5Eg" target="_blank" rel="noopener">
+                Knoff Yoga School YouTube channel
+              </a>
+              .
+            </p>
+          </Reveal>{" "}
           <Reveal className="videos-head">
             {" "}
             <div>

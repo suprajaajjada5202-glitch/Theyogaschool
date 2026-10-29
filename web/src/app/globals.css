@@ -2172,6 +2172,14 @@ body.is-locked {
   gap: var(--s-2);
   margin-top: var(--s-4);
 }
+.badges__note {
+  margin: var(--s-4) 0 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+.badges__note + .badges {
+  margin-top: var(--s-2);
+}
 .badges img {
   height: 72px;
   width: auto;
@@ -2347,6 +2355,32 @@ button:hover .play {
   color: var(--c-white);
   line-height: 1.2;
 }
+/* Teacher training: Master Teachers photo beside the facts, and the overview video in its own block */
+.tt-photo figure {
+  margin: 0;
+  max-width: 520px;
+  margin-inline: auto;
+}
+.tt-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+.tt-photo figcaption {
+  margin-top: 12px;
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.72);
+}
+.tt-video {
+  max-width: 880px;
+  margin-inline: auto;
+  text-align: center;
+}
+.tt-video h2 {
+  margin-bottom: var(--s-4);
+}
 .videos-head {
   display: flex;
   flex-wrap: wrap;
@@ -2427,6 +2461,10 @@ button:hover .play {
   --momenceColorBackground: #ffffff;
   --momenceColorPrimary: 0, 171, 201;
   --momenceColorBlack: 14, 50, 103;
+}
+/* Per-session prices stay hidden in the timetable, as on the old site (prices live on the Prices page) */
+.momence-host_schedule-session_list-item-price {
+  visibility: hidden !important;
 }
 /* Momence bakes the colours above into fixed values once, when the widget loads, and hard-codes
    its titles as near-black. Its full palette, defined here from the theme roles, follows the
@@ -4666,6 +4704,24 @@ body::after {
   border: 1.5px solid var(--c-secondary);
   opacity: 0.5;
 }
+.arch__inset {
+  position: absolute;
+  z-index: 2;
+  top: 6%;
+  left: -8%;
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid var(--c-bg);
+  box-shadow: var(--shadow-lg);
+}
+.arch__inset img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
 .arch__badge {
   position: absolute;
   z-index: 2;
@@ -4724,6 +4780,68 @@ body::after {
 @media (min-width: 1024px) {
   .split--even {
     grid-template-columns: 1fr 1fr !important;
+  }
+}
+/* About: Knoff Yoga definition (sticky title, quote and photo beside the text) */
+.knoff {
+  display: grid;
+  gap: var(--s-5);
+}
+.knoff__aside .pull {
+  margin-bottom: 0;
+}
+.knoff__photo {
+  max-width: 300px;
+  margin: var(--s-5) 0 0;
+}
+.knoff__intro {
+  color: var(--c-ink);
+  margin-bottom: var(--s-3);
+}
+.knoff__gains {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: var(--s-4) 0;
+}
+.knoff__gains li {
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  font-family: var(--f-heading);
+  font-size: var(--fs-lg);
+  color: var(--c-heading);
+  text-transform: capitalize;
+}
+.knoff__gains b {
+  display: block;
+  font-family: var(--f-body);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-secondary-ink);
+}
+@media (min-width: 640px) {
+  .knoff__gains {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 1023px) {
+  .knoff__photo {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .knoff {
+    grid-template-columns: 5fr 6fr;
+    gap: var(--s-10);
+    align-items: start;
+  }
+  .knoff__aside {
+    position: sticky;
+    top: 112px;
   }
 }
 .prose-lg p {
@@ -5162,6 +5280,17 @@ body::after {
 }
 
 /* Section footer link */
+/* Small text link under a video (Teacher Training channel, home "more videos") */
+.tt-channel {
+  margin-top: 12px;
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+.tt-channel a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .section-foot {
   margin-top: var(--s-5);
   display: flex;
@@ -5204,7 +5333,11 @@ main > section {
 /* Testimonials: navy hero with one quote and a story index, CeCelia's story, then stories in chapters */
 .voices-hero {
   padding: 132px 0 var(--s-8);
-  background: var(--c-primary);
+  /* the live site's Testimonials header photo, darkened so the quote stays readable */
+  background:
+    linear-gradient(rgba(11, 34, 74, 0.86), rgba(11, 34, 74, 0.92)),
+    url("/images/headers/testimonials.jpg") center / cover no-repeat,
+    var(--c-primary);
   color: rgba(255, 255, 255, 0.82);
 }
 @media (min-width: 1024px) {

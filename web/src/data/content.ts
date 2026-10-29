@@ -450,22 +450,19 @@ export const gallery: GalleryPhoto[] = [
 
 export const teachers: Teacher[] = [
   {
-    slug: "ronnieperry",
-    name: "Ronnie Perry",
-    role: "Studio Owner & Teacher",
-    spec: "200 hrs Knoff teacher training · owner since 2018",
+    slug: "owenscotts",
+    name: "Owen Scotts",
+    role: "Concierge",
+    spec: "Welcoming new students for over 19 years",
     photo: {
-      src: "/images/teachers/teacher_0.jpg",
-      alt: "Portrait of Ronnie Perry",
-      width: 456,
+      src: "/images/teachers/teacher_10.jpg",
+      alt: "Portrait of Owen Scotts",
+      width: 457,
       height: 640,
     },
     bio: [
-      "Ronnie's first experience with yoga was when he was travelling with the Australian Parachute Team (APT) as coach and manager. 'I always knew the body could heal itself but how do you get into that healing state'. Ronnie soon learnt that using breath work and yoga is a great way into the body's self healing mechanism.",
-      "Ronnie's first class as a student at The Yoga School was in 2015, he then went on 'yoga binges' where he would be seen at classes 8 days in a row and he felt a genuine calming of the mind and a greater awareness of his 'inner dialogue'.",
-      "Between 2017 and 2020 Ronnie completed 200hrs of teacher Training with Nicky Knoff and so the teaching journey began.",
-      "In 2018 he had the opportunity to take ownership of The Yoga School, because of the authenticity and high quality of teaching provided by the Knoff trained teachers it was an easy decision to make.",
-      "Here's to a bright and shiny future!",
+      "Owen is a valued member of The Yoga School team and has been involved in the day to day activities of the studio for over 19 years. He is the official meet and greet person at our busy yoga classes and is skilled at making new students feel welcome and comfortable.",
+      "As a community-minded person, Owen has also been involved as a volunteer with the YAPS animal shelter for 15 years, and Crime Stoppers for 9 years.",
     ],
   },
   {
@@ -506,52 +503,6 @@ export const teachers: Teacher[] = [
     ],
   },
   {
-    slug: "tomokogregory",
-    name: "Tomoko Gregory",
-    role: "Yoga Teacher",
-    spec: "All 9 levels of Knoff teacher training",
-    photo: {
-      src: "/images/teachers/teacher_3.jpg",
-      alt: "Portrait of Tomoko Gregory",
-      width: 605,
-      height: 640,
-    },
-    bio: [
-      "Tomoko first began practising yoga in Japan when she was 17 years old. When she moved to Australia she began training under Nicky Knoff and James Bryan at the Cairns Ashtanga Yoga School in 1997. She completed her first teacher training course with Nicky in 2006. Over the last 15 years she has completed all 9 levels of teacher training including: Discovery, Foundation, Intermediate, Advanced and Master levels as well as specialist yoga disciplines, including Chair yoga, Pregnancy yoga and Holistic yoga A&B.",
-    ],
-  },
-  {
-    slug: "janwatson",
-    name: "Jan Watson",
-    role: "Yoga Teacher",
-    spec: "Certified Iyengar teacher · Senior Teacher, Yoga Australia",
-    photo: {
-      src: "/images/teachers/teacher_4.jpg",
-      alt: "Portrait of Jan Watson",
-      width: 640,
-      height: 593,
-    },
-    bio: [
-      "Yoga has been a part of Jan’s life since early adulthood; starting yoga in the 1970’s. Jan’s practice has been diverse; from the glamour and glitz of Bette Carman to Ashrams to Michael Volin, who established the first yoga school in Australia. Her first teacher training was a 12 month, correspondence course, through S.A. Yoga Teachers Association. She was granted a Diploma of Teaching in 1991. She began teaching yoga in 1992 in Gordonvale. In 1993, Jan apprenticed to Nicky Knoff for 3 years and certified as an Iyengar Yoga Teacher in 1997. She taught classes for Nicky and James until she established The Yoga Centre, in Cairns, in 2001. She went to India twice, to study with Dr. Geeta Iyengar and to meet BKS Iyengar. She has also studied and worked with Peter Scott. Jan Qualifications: Intermediate (JI 2) Iyengar Yoga certificate Senior Teacher with Yoga Australia Senior Level 5 Teacher with Yoga Alliance What inspires Jan about Yoga is that It keeps you in tune with yourself; physically and mentally.",
-    ],
-  },
-  {
-    slug: "nicolamellick",
-    name: "Nicola Mellick",
-    role: "Yoga Teacher",
-    spec: "Pregnancy yoga · Yoga Therapy A & B",
-    photo: {
-      src: "/images/teachers/teacher_5.jpg",
-      alt: "Portrait of Nicola Mellick",
-      width: 455,
-      height: 640,
-    },
-    bio: [
-      "Yoga has been focal/central part of Nicola’s life since childhood with her grandparents and mother practising.  She has memories of her Nana in shoulder stand and a sign on their dining room table ‘BREATHE’. Her career path ventured through Education, Psychology and a  Masters in Education,  always drawn to roles within the community. After completing Discovery and Foundation Teacher Training in 2011, with no plans to teach, her mother told her they needed a yoga teacher at the studio she attended. That was the beginning of her love of teaching yoga. In 2012 Nicola completed Intermediate, Pregnancy, Yoga Therapy A and B.",
-      "'With almost 10 years teaching yoga, it still doesn’t feel like a job. It’s my passion. It empowers people to lead a healthier, stronger, fitter, calmer life with an ability to respond to day to day activities or challenges. It creates space in our day and mind to make positive choices.  Yoga is for everyone!’",
-    ],
-  },
-  {
     slug: "jenniferearl",
     name: "Jennifer Earl",
     role: "Yoga Teacher",
@@ -568,6 +519,25 @@ export const teachers: Teacher[] = [
       "She loves sharing Yoga with all walks of life and helping them navigate through their practices, challenging them to their edge but also encouraging people to listen to their bodies and pull back.",
       "Yoga is all about bringing the body back into balance and harmony and Yoga Asana is one way of working with the body to achieve this sense of calm and centring.",
       "I look forward to seeing you at the Yoga School.",
+    ],
+  },
+  {
+    slug: "ronnieperry",
+    name: "Ronnie Perry",
+    role: "Teacher & Studio Owner",
+    spec: "200 hrs Knoff teacher training · owner since 2018",
+    photo: {
+      src: "/images/teachers/teacher_0.jpg",
+      alt: "Portrait of Ronnie Perry",
+      width: 456,
+      height: 640,
+    },
+    bio: [
+      "Ronnie's first experience with yoga was when he was travelling with the Australian Parachute Team (APT) as coach and manager. 'I always knew the body could heal itself but how do you get into that healing state'. Ronnie soon learnt that using breath work and yoga is a great way into the body's self healing mechanism.",
+      "Ronnie's first class as a student at The Yoga School was in 2015, he then went on 'yoga binges' where he would be seen at classes 8 days in a row and he felt a genuine calming of the mind and a greater awareness of his 'inner dialogue'.",
+      "Between 2017 and 2020 Ronnie completed 200hrs of teacher Training with Nicky Knoff and so the teaching journey began.",
+      "In 2018 he had the opportunity to take ownership of The Yoga School, because of the authenticity and high quality of teaching provided by the Knoff trained teachers it was an easy decision to make.",
+      "Here's to a bright and shiny future!",
     ],
   },
   {
@@ -622,19 +592,49 @@ export const teachers: Teacher[] = [
     ],
   },
   {
-    slug: "owenscotts",
-    name: "Owen Scotts",
-    role: "Concierge",
-    spec: "Welcoming new students for over 19 years",
+    slug: "nicolamellick",
+    name: "Nicola Mellick",
+    role: "Yoga Teacher",
+    spec: "Pregnancy yoga · Yoga Therapy A & B",
     photo: {
-      src: "/images/teachers/teacher_10.jpg",
-      alt: "Portrait of Owen Scotts",
-      width: 457,
+      src: "/images/teachers/teacher_5.jpg",
+      alt: "Portrait of Nicola Mellick",
+      width: 455,
       height: 640,
     },
     bio: [
-      "Owen is a valued member of The Yoga School team and has been involved in the day to day activities of the studio for over 19 years. He is the official meet and greet person at our busy yoga classes and is skilled at making new students feel welcome and comfortable.",
-      "As a community-minded person, Owen has also been involved as a volunteer with the YAPS animal shelter for 15 years, and Crime Stoppers for 9 years.",
+      "Yoga has been focal/central part of Nicola’s life since childhood with her grandparents and mother practising.  She has memories of her Nana in shoulder stand and a sign on their dining room table ‘BREATHE’. Her career path ventured through Education, Psychology and a  Masters in Education,  always drawn to roles within the community. After completing Discovery and Foundation Teacher Training in 2011, with no plans to teach, her mother told her they needed a yoga teacher at the studio she attended. That was the beginning of her love of teaching yoga. In 2012 Nicola completed Intermediate, Pregnancy, Yoga Therapy A and B.",
+      "'With almost 10 years teaching yoga, it still doesn’t feel like a job. It’s my passion. It empowers people to lead a healthier, stronger, fitter, calmer life with an ability to respond to day to day activities or challenges. It creates space in our day and mind to make positive choices.  Yoga is for everyone!’",
+    ],
+  },
+  {
+    slug: "janwatson",
+    name: "Jan Watson",
+    role: "Yoga Teacher",
+    spec: "Certified Iyengar teacher · Senior Teacher, Yoga Australia",
+    photo: {
+      src: "/images/teachers/teacher_4.jpg",
+      alt: "Portrait of Jan Watson",
+      width: 640,
+      height: 593,
+    },
+    bio: [
+      "Yoga has been a part of Jan’s life since early adulthood; starting yoga in the 1970’s. Jan’s practice has been diverse; from the glamour and glitz of Bette Carman to Ashrams to Michael Volin, who established the first yoga school in Australia. Her first teacher training was a 12 month, correspondence course, through S.A. Yoga Teachers Association. She was granted a Diploma of Teaching in 1991. She began teaching yoga in 1992 in Gordonvale. In 1993, Jan apprenticed to Nicky Knoff for 3 years and certified as an Iyengar Yoga Teacher in 1997. She taught classes for Nicky and James until she established The Yoga Centre, in Cairns, in 2001. She went to India twice, to study with Dr. Geeta Iyengar and to meet BKS Iyengar. She has also studied and worked with Peter Scott. Jan Qualifications: Intermediate (JI 2) Iyengar Yoga certificate Senior Teacher with Yoga Australia Senior Level 5 Teacher with Yoga Alliance What inspires Jan about Yoga is that It keeps you in tune with yourself; physically and mentally.",
+    ],
+  },
+  {
+    slug: "tomokogregory",
+    name: "Tomoko Gregory",
+    role: "Yoga Teacher",
+    spec: "All 9 levels of Knoff teacher training",
+    photo: {
+      src: "/images/teachers/teacher_3.jpg",
+      alt: "Portrait of Tomoko Gregory",
+      width: 605,
+      height: 640,
+    },
+    bio: [
+      "Tomoko first began practising yoga in Japan when she was 17 years old. When she moved to Australia she began training under Nicky Knoff and James Bryan at the Cairns Ashtanga Yoga School in 1997. She completed her first teacher training course with Nicky in 2006. Over the last 15 years she has completed all 9 levels of teacher training including: Discovery, Foundation, Intermediate, Advanced and Master levels as well as specialist yoga disciplines, including Chair yoga, Pregnancy yoga and Holistic yoga A&B.",
     ],
   },
 ];
