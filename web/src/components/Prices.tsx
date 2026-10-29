@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Membership, PassGroup } from "@/lib/types";
+import { MEMBERSHIP_TERMS_URL } from "@/lib/site";
 import { CtaLink } from "./CtaLink";
 import { TileIcon, Use } from "./Icons";
 import { Reveal } from "./Reveal";
@@ -28,6 +29,9 @@ export function MembershipCards({ plans }: { plans: Membership[] }) {
           <CtaLink className={`btn ${p.featured ? "btn--teal" : "btn--outline"}`} href={p.ctaUrl}>
             {p.ctaLabel}
           </CtaLink>
+          <a className="plan__tandc" href={MEMBERSHIP_TERMS_URL} target="_blank" rel="noopener">
+            Terms &amp; Conditions<span className="sr-only"> for the {p.name} membership (PDF, opens in a new tab)</span>
+          </a>
         </Reveal>
       ))}
     </div>

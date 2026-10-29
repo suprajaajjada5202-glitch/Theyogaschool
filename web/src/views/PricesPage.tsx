@@ -4,6 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { seo } from "@/lib/seo";
+import { MEMBERSHIP_TERMS_URL } from "@/lib/site";
 import { getMemberships, getPasses } from "@/lib/data";
 
 export default async function PricesPage() {
@@ -178,7 +179,11 @@ export default async function PricesPage() {
                   all students. Thank you for your understanding.
                 </li>
                 <li>
-                  Memberships are subject to our <Link href="/pages/terms-and-conditions">Terms &amp; Conditions</Link>.
+                  Memberships are subject to our{" "}
+                  <a href={MEMBERSHIP_TERMS_URL} target="_blank" rel="noopener">
+                    Terms &amp; Conditions
+                  </a>
+                  .
                 </li>
               </ul>
             </Reveal>

@@ -2601,6 +2601,24 @@ body {
 .plan .btn {
   margin-top: auto;
 }
+.plan__tandc {
+  align-self: center;
+  margin-top: 12px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--c-ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.plan__tandc:hover {
+  color: var(--c-heading);
+}
+.plan--featured .plan__tandc {
+  color: rgba(255, 255, 255, 0.82);
+}
+.plan--featured .plan__tandc:hover {
+  color: #ffffff;
+}
 
 .promo {
   display: grid;

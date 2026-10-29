@@ -1101,7 +1101,7 @@ export const memberships: Membership[] = [
     description: "Unlimited access to all regular TYS yoga classes.",
     priceLabel: "$80",
     period: "fortnight",
-    terms: "Minimum 12-week commitment",
+    terms: "Minimum 12-week commitment · Fortnightly direct debit",
     features: [
       "Knoff Yoga, Yin Yoga & Chair Yoga",
       "Monthly Sunday Sessions",
@@ -1111,14 +1111,14 @@ export const memberships: Membership[] = [
     badge: null,
     featured: false,
     ctaLabel: "Join Yoga Only",
-    ctaUrl: "/pages/contact-us?enquiry=Yoga%20Only%20membership",
+    ctaUrl: "https://momence.com/m/607575",
   },
   {
     name: "Everything",
     description: "All TYS yoga plus Shoshin strength & mobility classes.",
     priceLabel: "$98",
     period: "fortnight",
-    terms: "Minimum 12-week commitment",
+    terms: "Minimum 12-week commitment · Fortnightly direct debit",
     features: [
       "Unlimited yoga & Shoshin classes",
       "Monthly Sunday Sessions",
@@ -1128,14 +1128,14 @@ export const memberships: Membership[] = [
     badge: "All access",
     featured: true,
     ctaLabel: "Join Everything",
-    ctaUrl: "/pages/contact-us?enquiry=Everything%20membership",
+    ctaUrl: "https://momence.com/m/691591",
   },
   {
     name: "Shoshin Only",
     description: "Unlimited access to all Shoshin strength & mobility classes.",
     priceLabel: "$80",
     period: "fortnight",
-    terms: "Minimum 12-week commitment",
+    terms: "Minimum 12-week commitment · Fortnightly direct debit",
     features: [
       "All Shoshin strength & mobility classes",
       "10% off retail",
@@ -1145,7 +1145,7 @@ export const memberships: Membership[] = [
     badge: null,
     featured: false,
     ctaLabel: "Join Shoshin Only",
-    ctaUrl: "/pages/contact-us?enquiry=Shoshin%20Only%20membership",
+    ctaUrl: "https://momence.com/m/691590",
   },
 ];
 

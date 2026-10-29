@@ -2,6 +2,9 @@ export const SITE_URL = "https://theyogaschool.com.au";
 export const LOGO =
   "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/Site_Logo2.png";
 export const OFFER_URL = "https://momence.com/The-Yoga-School/membership/30-days-$99-NS-intro-offer-special!/113989";
+/** Membership T&Cs (2026) — one PDF covering Yoga Only, Shoshin Only and Everything, linked from each membership card */
+export const MEMBERSHIP_TERMS_URL =
+  "https://3989ac5bcbe1edfc864a-0a7f10f87519dba22d2dbc6233a731e5.ssl.cf2.rackcdn.com/TheYogaSchool/the-yoga-school/Terms_and_conditions_2026_V2.pdf";
 /** Google Maps embed of the studio (Contact page, home page "Locate us") */
 export const MAP_EMBED =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d954.6893892806809!2d145.7398414291665!3d-16.91193361616657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x697864372f355dc9:0xb1f69afbf68bcaa2!2sThe+Yoga+School!5e0!3m2!1sen!2sau!4v1534855194268";
